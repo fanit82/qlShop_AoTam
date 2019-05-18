@@ -45,6 +45,8 @@ namespace qlShop
                 }
                 
                 cbbThueVAT.EditValue = itemCopy.ThuaVAT;
+                //test 123
+
 
                 if (itemCopy.HinhAnh!=null)
                 {
