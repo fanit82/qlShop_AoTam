@@ -1,0 +1,31 @@
+﻿26/09/2015
+*Database
+-Table: DonHang
+	Them 2 cot:KhachDua ; TienThua
+-table: DonHangChiTiet
+	Them cot:GiaVon
+	Them procedure :NH_BaoCao_TongHopDonHangTheoNgay
+- add font IDAutotionH
+- UPDATE  gia von khi ban hang
+------------------------------------/*-------------------------
+UPDATE DonHangChiTiet
+SET DonHangChiTiet.GiaVon = SanPham.GiaVon
+FROM DonHangChiTiet INNER JOIN SanPham
+ON DonHangChiTiet.SanPhamID = SanPham.SanPhamID
+------------------------------------------------------*/--------
+- update lại procedure NH_BaoCaoTongHop
+
+08/12/2015
+- Chuc nang quy tien mat.(table và proc lien quan) 
+- tra hang. (table và proc lien quan)
+	table TraHang
+	table TraHangChiTiet
+	NH_TraHangChiTiet_GetSanPham
+----------------------------------------------------------------------------
+update V3 15/12/2015
+- Table TraHangChiTiet
+	-them cot DonGiaTra
+- Table Tra Hang
+	- Them Cot TongTienTra
+- Add them pro NH_TraCuuChiTietDonHang
+- Sua pro NH_TheKho (cap nhat them tra hang)
