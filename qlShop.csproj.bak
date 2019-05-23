@@ -47,46 +47,46 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.Data.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+    <Reference Include="DevExpress.Data.v13.2, Version=13.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.Printing.v13.1.Core, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+    <Reference Include="DevExpress.Printing.v13.2.Core, Version=13.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.Utils.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+    <Reference Include="DevExpress.Utils.v13.2, Version=13.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraBars.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.XtraBars.v13.2, Version=13.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraEditors.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+    <Reference Include="DevExpress.XtraEditors.v13.2, Version=13.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraGrid.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.XtraGrid.v13.2, Version=13.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraLayout.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+    <Reference Include="DevExpress.XtraLayout.v13.2, Version=13.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraNavBar.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.XtraNavBar.v13.2, Version=13.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraPrinting.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+    <Reference Include="DevExpress.XtraPrinting.v13.2, Version=13.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraTreeList.v13.1, Version=13.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.XtraTreeList.v13.2, Version=13.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304">
@@ -199,6 +199,12 @@
     <Compile Include="frmCauHinh.Designer.cs">
       <DependentUpon>frmCauHinh.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmChangePass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangePass.Designer.cs">
+      <DependentUpon>frmChangePass.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmChiPhi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,6 +223,12 @@
     <Compile Include="frmDoanhSo.Designer.cs">
       <DependentUpon>frmDoanhSo.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDSTraHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDSTraHang.Designer.cs">
+      <DependentUpon>frmDSTraHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmDonHang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -234,6 +246,12 @@
     </Compile>
     <Compile Include="frmGachNo.Designer.cs">
       <DependentUpon>frmGachNo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportSanPham.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportSanPham.Designer.cs">
+      <DependentUpon>frmImportSanPham.cs</DependentUpon>
     </Compile>
     <Compile Include="frmKhachHang.cs">
       <SubType>Form</SubType>
@@ -319,6 +337,12 @@
     <Compile Include="frmTonKho.Designer.cs">
       <DependentUpon>frmTonKho.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTraCuuThongTin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTraCuuThongTin.Designer.cs">
+      <DependentUpon>frmTraCuuThongTin.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTraHang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -339,6 +363,7 @@
     <Compile Include="models\QuyTienMatController.cs" />
     <Compile Include="models\SanPhamController.cs" />
     <Compile Include="models\ThongTinShopController.cs" />
+    <Compile Include="models\TraHangController.cs" />
     <Compile Include="models\Utility.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -347,12 +372,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BaoCaoTongHop.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="reports\BarCode.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BarCode.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="reports\frmViewReports.cs">
       <SubType>Form</SubType>
@@ -360,11 +387,19 @@
     <Compile Include="reports\frmViewReports.Designer.cs">
       <DependentUpon>frmViewReports.cs</DependentUpon>
     </Compile>
+    <Compile Include="reports\PhieuTam.cs">
+      <DependentUpon>PhieuTam.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="reports\PhieuBanHang.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PhieuBanHang.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="reports\reportsController.cs" />
     <Compile Include="reports\TheKho.cs">
@@ -372,6 +407,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TheKho.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -403,6 +439,9 @@
     <EmbeddedResource Include="frmCauHinh.resx">
       <DependentUpon>frmCauHinh.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmChangePass.resx">
+      <DependentUpon>frmChangePass.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmChiPhi.resx">
       <DependentUpon>frmChiPhi.cs</DependentUpon>
     </EmbeddedResource>
@@ -412,6 +451,9 @@
     <EmbeddedResource Include="frmDoanhSo.resx">
       <DependentUpon>frmDoanhSo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmDSTraHang.resx">
+      <DependentUpon>frmDSTraHang.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDonHang.resx">
       <DependentUpon>frmDonHang.cs</DependentUpon>
     </EmbeddedResource>
@@ -420,6 +462,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmGachNo.resx">
       <DependentUpon>frmGachNo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportSanPham.resx">
+      <DependentUpon>frmImportSanPham.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmKhachHang.resx">
       <DependentUpon>frmKhachHang.cs</DependentUpon>
@@ -463,6 +508,9 @@
     <EmbeddedResource Include="frmTonKho.resx">
       <DependentUpon>frmTonKho.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmTraCuuThongTin.resx">
+      <DependentUpon>frmTraCuuThongTin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmTraHang.resx">
       <DependentUpon>frmTraHang.cs</DependentUpon>
     </EmbeddedResource>
@@ -480,21 +528,30 @@
     <EmbeddedResource Include="reports\BaoCaoTongHop.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BaoCaoTongHop.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="reports\BarCode.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BarCode.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="reports\frmViewReports.resx">
       <DependentUpon>frmViewReports.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="reports\PhieuTam.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PhieuTam.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="reports\PhieuBanHang.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PhieuBanHang.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="reports\TheKho.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>TheKho.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>
@@ -624,6 +681,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="LogUpdate.txt" />
+    <None Include="Resources\exporttoxls_16x16.png" />
+    <None Include="Resources\assigntome_32x32.png" />
+    <None Include="Resources\refresh_32x32.png" />
+    <None Include="Resources\cancel_32x32.png" />
+    <None Include="Resources\technology_32x32.png" />
+    <None Include="Resources\zoom100_32x32.png" />
+    <None Include="Resources\previewchart_32x32.png" />
+    <None Include="Resources\pie_32x32.png" />
+    <None Include="Resources\kpi_32x321.png" />
     <None Include="Resources\historyitem_32x32.png" />
     <None Include="Resources\currency_32x32.png" />
     <None Include="Resources\operatingsyste_16x16.png" />

@@ -283,5 +283,10 @@ namespace qlShop
             gridView1.ActiveFilterString = string.Format("[SanPhamID] like '%{0}%' or TenSanPham like '%{0}%'", txtSearch.Text);
         }
 
+        private void simpleButton1_Click_1(object sender, EventArgs e)
+        {
+            frmImportSanPham f = new frmImportSanPham();
+            f.ShowDialog(this);
+        }
     }
 }
