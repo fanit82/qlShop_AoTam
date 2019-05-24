@@ -72,9 +72,9 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 431);
+            this.statusStrip.Location = new System.Drawing.Point(0, 662);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(632, 22);
+            this.statusStrip.Size = new System.Drawing.Size(783, 22);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "StatusStrip";
             // 
@@ -98,28 +98,32 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(632, 0);
+            this.barDockControlTop.Manager = this.barManager1;
+            this.barDockControlTop.Size = new System.Drawing.Size(783, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 453);
-            this.barDockControlBottom.Size = new System.Drawing.Size(632, 0);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 684);
+            this.barDockControlBottom.Manager = this.barManager1;
+            this.barDockControlBottom.Size = new System.Drawing.Size(783, 0);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 453);
+            this.barDockControlLeft.Manager = this.barManager1;
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 684);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(632, 0);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 453);
+            this.barDockControlRight.Location = new System.Drawing.Point(783, 0);
+            this.barDockControlRight.Manager = this.barManager1;
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 684);
             // 
             // navBarControl1
             // 
@@ -153,7 +157,7 @@
             this.navBarControl1.Name = "navBarControl1";
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 140;
             this.navBarControl1.PaintStyleKind = DevExpress.XtraNavBar.NavBarViewKind.ExplorerBar;
-            this.navBarControl1.Size = new System.Drawing.Size(140, 431);
+            this.navBarControl1.Size = new System.Drawing.Size(140, 662);
             this.navBarControl1.TabIndex = 8;
             this.navBarControl1.Text = "navBarControl1";
             this.navBarControl1.Click += new System.EventHandler(this.navBarControl1_Click);
@@ -165,7 +169,9 @@
             this.navBarGroup1.Appearance.Options.UseFont = true;
             this.navBarGroup1.Appearance.Options.UseForeColor = true;
             this.navBarGroup1.Caption = "Bán Hàng";
+            this.navBarGroup1.Expanded = true;
             this.navBarGroup1.GroupCaptionUseImage = DevExpress.XtraNavBar.NavBarImage.Small;
+            this.navBarGroup1.ImageOptions.SmallImage = global::qlShop.Properties.Resources.kpi_32x32;
             this.navBarGroup1.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem1),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem3),
@@ -174,54 +180,53 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem2),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem13)});
             this.navBarGroup1.Name = "navBarGroup1";
-            this.navBarGroup1.SmallImage = global::qlShop.Properties.Resources.kpi_32x32;
             // 
             // navBarItem1
             // 
             this.navBarItem1.Caption = "Đơn hàng";
+            this.navBarItem1.ImageOptions.SmallImage = global::qlShop.Properties.Resources.task_32x32;
             this.navBarItem1.Name = "navBarItem1";
-            this.navBarItem1.SmallImage = global::qlShop.Properties.Resources.task_32x32;
             this.navBarItem1.Tag = "frmDonHang";
             this.navBarItem1.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem1_LinkClicked);
             // 
             // navBarItem3
             // 
             this.navBarItem3.Caption = "Khách hàng";
+            this.navBarItem3.ImageOptions.SmallImage = global::qlShop.Properties.Resources.contact_32x32;
             this.navBarItem3.Name = "navBarItem3";
-            this.navBarItem3.SmallImage = global::qlShop.Properties.Resources.contact_32x32;
             this.navBarItem3.Tag = "frmKhachHang";
             this.navBarItem3.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem3_LinkClicked);
             // 
             // navBarItem11
             // 
             this.navBarItem11.Caption = "Gạch nợ";
-            this.navBarItem11.LargeImage = global::qlShop.Properties.Resources.clearformatting_32x32;
+            this.navBarItem11.ImageOptions.LargeImage = global::qlShop.Properties.Resources.clearformatting_32x32;
+            this.navBarItem11.ImageOptions.SmallImage = global::qlShop.Properties.Resources.clearformatting_32x32;
             this.navBarItem11.Name = "navBarItem11";
-            this.navBarItem11.SmallImage = global::qlShop.Properties.Resources.clearformatting_32x32;
             this.navBarItem11.Tag = "frmGachNo";
             this.navBarItem11.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem11_LinkClicked);
             // 
             // navBarItem10
             // 
             this.navBarItem10.Caption = "Nhà cung cấp";
+            this.navBarItem10.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarItem10.ImageOptions.SmallImage")));
             this.navBarItem10.Name = "navBarItem10";
-            this.navBarItem10.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarItem10.SmallImage")));
             this.navBarItem10.Tag = "frmNhaCungCap";
             this.navBarItem10.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem10_LinkClicked);
             // 
             // navBarItem2
             // 
             this.navBarItem2.Caption = "Sản phẩm";
+            this.navBarItem2.ImageOptions.SmallImage = global::qlShop.Properties.Resources.barcode_32x32;
             this.navBarItem2.Name = "navBarItem2";
-            this.navBarItem2.SmallImage = global::qlShop.Properties.Resources.barcode_32x32;
             this.navBarItem2.Tag = "frmSanPham";
             this.navBarItem2.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem2_LinkClicked);
             // 
             // navBarItem13
             // 
             this.navBarItem13.Caption = "Trả hàng";
+            this.navBarItem13.ImageOptions.SmallImage = global::qlShop.Properties.Resources.historyitem_32x32;
             this.navBarItem13.Name = "navBarItem13";
-            this.navBarItem13.SmallImage = global::qlShop.Properties.Resources.historyitem_32x32;
             this.navBarItem13.Tag = "frmDSTraHang";
             this.navBarItem13.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem13_LinkClicked);
             // 
@@ -230,6 +235,8 @@
             this.navBarGroup2.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.navBarGroup2.Appearance.Options.UseFont = true;
             this.navBarGroup2.Caption = "Quản lý";
+            this.navBarGroup2.Expanded = true;
+            this.navBarGroup2.ImageOptions.SmallImage = global::qlShop.Properties.Resources.pie_32x32;
             this.navBarGroup2.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem4),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem5),
@@ -238,53 +245,52 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem6),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem8)});
             this.navBarGroup2.Name = "navBarGroup2";
-            this.navBarGroup2.SmallImage = global::qlShop.Properties.Resources.pie_32x32;
             // 
             // navBarItem4
             // 
             this.navBarItem4.Caption = "Nhập kho";
+            this.navBarItem4.ImageOptions.SmallImage = global::qlShop.Properties.Resources.addnewdatasource_32x32;
             this.navBarItem4.Name = "navBarItem4";
-            this.navBarItem4.SmallImage = global::qlShop.Properties.Resources.addnewdatasource_32x32;
             this.navBarItem4.Tag = "frmNhapKho";
             this.navBarItem4.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem4_LinkClicked);
             // 
             // navBarItem5
             // 
             this.navBarItem5.Caption = "Tồn kho";
+            this.navBarItem5.ImageOptions.SmallImage = global::qlShop.Properties.Resources.database_32x32;
             this.navBarItem5.Name = "navBarItem5";
-            this.navBarItem5.SmallImage = global::qlShop.Properties.Resources.database_32x32;
             this.navBarItem5.Tag = "frmTonKho";
             this.navBarItem5.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem5_LinkClicked);
             // 
             // navBarItem12
             // 
             this.navBarItem12.Caption = "Quỹ Tiền Mặt";
+            this.navBarItem12.ImageOptions.SmallImage = global::qlShop.Properties.Resources.currency_32x32;
             this.navBarItem12.Name = "navBarItem12";
-            this.navBarItem12.SmallImage = global::qlShop.Properties.Resources.currency_32x32;
             this.navBarItem12.Tag = "frmQuyTienMat";
             this.navBarItem12.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem12_LinkClicked);
             // 
             // navBarItem7
             // 
             this.navBarItem7.Caption = "Chi phí";
+            this.navBarItem7.ImageOptions.SmallImage = global::qlShop.Properties.Resources.build_32x32;
             this.navBarItem7.Name = "navBarItem7";
-            this.navBarItem7.SmallImage = global::qlShop.Properties.Resources.build_32x32;
             this.navBarItem7.Tag = "frmQLChiPhi";
             this.navBarItem7.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem7_LinkClicked);
             // 
             // navBarItem6
             // 
             this.navBarItem6.Caption = "Doanh số";
+            this.navBarItem6.ImageOptions.SmallImage = global::qlShop.Properties.Resources.stackedbar_32x32;
             this.navBarItem6.Name = "navBarItem6";
-            this.navBarItem6.SmallImage = global::qlShop.Properties.Resources.stackedbar_32x32;
             this.navBarItem6.Tag = "frmDoanhSo";
             this.navBarItem6.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem6_LinkClicked);
             // 
             // navBarItem8
             // 
             this.navBarItem8.Caption = "Tổng hợp";
+            this.navBarItem8.ImageOptions.SmallImage = global::qlShop.Properties.Resources.kpi_32x32;
             this.navBarItem8.Name = "navBarItem8";
-            this.navBarItem8.SmallImage = global::qlShop.Properties.Resources.kpi_32x32;
             this.navBarItem8.Tag = "frmTongHop";
             this.navBarItem8.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem8_LinkClicked);
             // 
@@ -293,16 +299,17 @@
             this.navBarGroup3.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.navBarGroup3.Appearance.Options.UseFont = true;
             this.navBarGroup3.Caption = "Tra cứu";
+            this.navBarGroup3.Expanded = true;
+            this.navBarGroup3.ImageOptions.SmallImage = global::qlShop.Properties.Resources.previewchart_32x32;
             this.navBarGroup3.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem14)});
             this.navBarGroup3.Name = "navBarGroup3";
-            this.navBarGroup3.SmallImage = global::qlShop.Properties.Resources.previewchart_32x32;
             // 
             // navBarItem14
             // 
             this.navBarItem14.Caption = "Tra đơn hàng";
+            this.navBarItem14.ImageOptions.SmallImage = global::qlShop.Properties.Resources.zoom100_32x32;
             this.navBarItem14.Name = "navBarItem14";
-            this.navBarItem14.SmallImage = global::qlShop.Properties.Resources.zoom100_32x32;
             this.navBarItem14.Tag = "frmTraCuuThongTin";
             this.navBarItem14.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem14_LinkClicked);
             // 
@@ -312,41 +319,41 @@
             this.navBarGroup4.Appearance.Options.UseFont = true;
             this.navBarGroup4.Caption = "Hệ thống";
             this.navBarGroup4.Expanded = true;
+            this.navBarGroup4.ImageOptions.SmallImage = global::qlShop.Properties.Resources.technology_32x32;
             this.navBarGroup4.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem9),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem17),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem15),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem16)});
             this.navBarGroup4.Name = "navBarGroup4";
-            this.navBarGroup4.SmallImage = global::qlShop.Properties.Resources.technology_32x32;
             // 
             // navBarItem9
             // 
             this.navBarItem9.Caption = "Cấu hình";
+            this.navBarItem9.ImageOptions.SmallImage = global::qlShop.Properties.Resources.chartyaxissettings_32x32;
             this.navBarItem9.Name = "navBarItem9";
-            this.navBarItem9.SmallImage = global::qlShop.Properties.Resources.chartyaxissettings_32x32;
             this.navBarItem9.Tag = "frmCauHinh";
             this.navBarItem9.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem9_LinkClicked);
             // 
             // navBarItem17
             // 
             this.navBarItem17.Caption = "Đổi mật khẩu";
+            this.navBarItem17.ImageOptions.SmallImage = global::qlShop.Properties.Resources.assigntome_32x32;
             this.navBarItem17.Name = "navBarItem17";
-            this.navBarItem17.SmallImage = global::qlShop.Properties.Resources.assigntome_32x32;
             this.navBarItem17.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem17_LinkClicked);
             // 
             // navBarItem15
             // 
             this.navBarItem15.Caption = "Đăng nhập lại";
+            this.navBarItem15.ImageOptions.SmallImage = global::qlShop.Properties.Resources.refresh_32x32;
             this.navBarItem15.Name = "navBarItem15";
-            this.navBarItem15.SmallImage = global::qlShop.Properties.Resources.refresh_32x32;
             this.navBarItem15.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem15_LinkClicked);
             // 
             // navBarItem16
             // 
             this.navBarItem16.Caption = "Thoát";
+            this.navBarItem16.ImageOptions.SmallImage = global::qlShop.Properties.Resources.cancel_32x32;
             this.navBarItem16.Name = "navBarItem16";
-            this.navBarItem16.SmallImage = global::qlShop.Properties.Resources.cancel_32x32;
             this.navBarItem16.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem16_LinkClicked);
             // 
             // xtraTabbedMdiManager1
@@ -357,7 +364,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 453);
+            this.ClientSize = new System.Drawing.Size(783, 684);
             this.Controls.Add(this.navBarControl1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.barDockControlLeft);

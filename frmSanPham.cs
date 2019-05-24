@@ -285,8 +285,12 @@ namespace qlShop
 
         private void simpleButton1_Click_1(object sender, EventArgs e)
         {
+            //frmImportSanPham f = new frmImportSanPham();
+            //f.ShowDialog(this);
             frmImportSanPham f = new frmImportSanPham();
-            f.ShowDialog(this);
+            f.MdiParent = this.MdiParent;
+            f.Show();
+            this.Dispose();
         }
     }
 }

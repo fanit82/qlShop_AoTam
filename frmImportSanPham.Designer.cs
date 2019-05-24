@@ -35,6 +35,8 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.btn_save = new DevExpress.XtraEditors.SimpleButton();
+            this.lblStatus = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFileName.Properties)).BeginInit();
@@ -44,6 +46,8 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.lblStatus);
+            this.panelControl1.Controls.Add(this.btn_save);
             this.panelControl1.Controls.Add(this.btn_load);
             this.panelControl1.Controls.Add(this.txtFileName);
             this.panelControl1.Controls.Add(this.btnOpenFile);
@@ -104,6 +108,24 @@
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             // 
+            // btn_save
+            // 
+            this.btn_save.ImageOptions.Image = global::qlShop.Properties.Resources.save_16x16;
+            this.btn_save.Location = new System.Drawing.Point(497, 14);
+            this.btn_save.Name = "btn_save";
+            this.btn_save.Size = new System.Drawing.Size(65, 23);
+            this.btn_save.TabIndex = 4;
+            this.btn_save.Text = "Update";
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.Location = new System.Drawing.Point(92, 39);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(56, 13);
+            this.lblStatus.TabIndex = 5;
+            this.lblStatus.Text = "Đang xử lý ";
+            // 
             // frmImportSanPham
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -132,5 +154,7 @@
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraEditors.SimpleButton btn_load;
+        private DevExpress.XtraEditors.SimpleButton btn_save;
+        private DevExpress.XtraEditors.LabelControl lblStatus;
     }
 }

@@ -1,1 +1,1 @@
-"C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools\SqlMetal.exe" /server:CNTT-NHATLH /database:qlShop2 /Context:QlShop /timeout:0 /code:"H:\PhanMemTuViet\BenNgoai\qlShop\models\LinqModels.cs"
+"C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\SqlMetal.exe" /server:DESKTOP-2KC7F34\SQLEXPRESS /database:qlShop2 /Context:QlShop /timeout:0 /code:"H:\PhanMemTuViet\BenNgoai\qlShop\models\LinqModels.cs"

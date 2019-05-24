@@ -33,8 +33,8 @@ namespace qlShop
                 txtSoLuong.EditValue = itemCopy.SLTonKho;
                 txtGiaVon.EditValue = itemCopy.GiaVon;
                 txtGiaBan.EditValue = itemCopy.GiaBan;
-                chkChoXuatAm.Checked = itemCopy.ChoXuatAm;
-                chkNgungKinhDoanh.Checked = itemCopy.NgungKinhDoanh;
+                chkChoXuatAm.Checked = itemCopy.ChoXuatAm==null?false: (bool)itemCopy.ChoXuatAm;
+                chkNgungKinhDoanh.Checked = itemCopy.NgungKinhDoanh==null?false:(bool)itemCopy.NgungKinhDoanh;
                 if (itemCopy.NhaSanXuatID!=null)
                 {
                     lookupNSX.EditValue = itemCopy.NhaSanXuatID;    

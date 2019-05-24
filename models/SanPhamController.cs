@@ -13,8 +13,8 @@ namespace qlShop.models
         static public void Add(SanPham item)
         {
             dbControl = new QlShop(Utility.GetConnectString());
-            item.TonKhoiTao = item.SLTonKho;
-            item.NgayKhoiTao = DateTime.Now;
+            //item.TonKhoiTao = item.SLTonKho;
+            //item.NgayKhoiTao = DateTime.Now;
             dbControl.SanPham.InsertOnSubmit(item);
             dbControl.SubmitChanges();
         }
@@ -61,7 +61,7 @@ namespace qlShop.models
             SanPham Item = dbControl.SanPham.SingleOrDefault(p => p.SanPhamID == strSanPhamID);
             if (Item!=null)
             {
-                return Item.SLTonKho;
+                return (int)Item.SLTonKho;
             }
             else
             {
@@ -75,7 +75,7 @@ namespace qlShop.models
             SanPham Item = dbControl.SanPham.SingleOrDefault(p => p.SanPhamID == strSanPhamID);
             if (Item != null)
             {
-                return Item.GiaVon;
+                return  (int)Item.GiaVon;
             }
             else 
             {
