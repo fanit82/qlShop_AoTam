@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.ApplicationBlocks.Data;
 using qlShop.models;
+using qlShop.qlshop_model;
+
 namespace qlShop.models
 {
     static public class ChiPhiController
@@ -16,13 +18,14 @@ namespace qlShop.models
         {
             using (TransactionScope Tscope = new TransactionScope())
             {
-                dbControl = new QlShop(Utility.GetConnectString());
+                dbControl = new QlShop();
                 item.LastUpdate = DateTime.Now;
                 item.CreateDate = DateTime.Now;
                 item.NguoiDungID = Utility.NguoiSuDung.NguoiDungID;
                 item.TenNguoiDung = Utility.NguoiSuDung.TenNguoiDung;
-                dbControl.ChiPhi.InsertOnSubmit(item);
-                dbControl.SubmitChanges();
+                //dbControl.ChiPhi.InsertOnSubmit(item);
+                dbControl.ChiPhis.Add()
+                dbControl.SaveChanges();
                 QuyTienMatController.XuatQuyTienMat(item.ChiPhiID.ToString(), item.NgayChi, item.SoTien, "CP", "TT chi phí");
                 Tscope.Complete();
             }

@@ -3680,6 +3680,8 @@ public partial class SanPham : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private string _GioTinh;
 	
+	private string _NhomSize;
+	
 	private System.Nullable<int> _NhomHangID;
 	
 	private string _TenNhomHang;
@@ -3724,6 +3726,8 @@ public partial class SanPham : INotifyPropertyChanging, INotifyPropertyChanged
     partial void OnDVTChanged();
     partial void OnGioTinhChanging(string value);
     partial void OnGioTinhChanged();
+    partial void OnNhomSizeChanging(string value);
+    partial void OnNhomSizeChanged();
     partial void OnNhomHangIDChanging(System.Nullable<int> value);
     partial void OnNhomHangIDChanged();
     partial void OnTenNhomHangChanging(string value);
@@ -3839,6 +3843,26 @@ public partial class SanPham : INotifyPropertyChanging, INotifyPropertyChanged
 				this._GioTinh = value;
 				this.SendPropertyChanged("GioTinh");
 				this.OnGioTinhChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NhomSize", DbType="NVarChar(10)")]
+	public string NhomSize
+	{
+		get
+		{
+			return this._NhomSize;
+		}
+		set
+		{
+			if ((this._NhomSize != value))
+			{
+				this.OnNhomSizeChanging(value);
+				this.SendPropertyChanging();
+				this._NhomSize = value;
+				this.SendPropertyChanged("NhomSize");
+				this.OnNhomSizeChanged();
 			}
 		}
 	}

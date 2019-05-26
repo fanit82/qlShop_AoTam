@@ -67,14 +67,14 @@ namespace qlShop
                             SanPham objSanPham = new SanPham();
                             objSanPham.SanPhamID = gridView1.GetRowCellValue(intDongXL, gridView1.Columns[0]).ToString();
 
-                            //ten san phẩm add luôn nhóm size
-                            string strTenSP = gridView1.GetRowCellValue(intDongXL, gridView1.Columns[1]).ToString();
+                                                        
+
                             string strNhomSize = gridView1.GetRowCellValue(intDongXL, gridView1.Columns[3]).ToString();
                             if (strNhomSize != string.Empty)
                             {
-                                strTenSP = string.Format("{0} ({1})", strTenSP, strNhomSize);
-                            }
-                            objSanPham.TenSanPham = strTenSP;
+                                objSanPham.NhomSize = strNhomSize;
+                            }                            
+                            objSanPham.TenSanPham = gridView1.GetRowCellValue(intDongXL, gridView1.Columns[1]).ToString();
                             if (gridView1.GetRowCellValue(intDongXL, gridView1.Columns[2])!=null)
                             {
                                 objSanPham.GioTinh = gridView1.GetRowCellValue(intDongXL, gridView1.Columns[2]).ToString();
@@ -84,6 +84,8 @@ namespace qlShop
                             objSanPham.NgayKhoiTao = DateTime.Now;
                             objSanPham.DVT = gridView1.GetRowCellValue(intDongXL, gridView1.Columns[7]).ToString();
                             objSanPham.NguoiDungID = Utility.NguoiSuDung.NguoiDungID;
+                            objSanPham.NgungKinhDoanh = false;
+
                             SanPhamController.Add(objSanPham);
                             gridView1.DeleteRow(intDongXL);//remove dong đầu tiên   
                             gridControl1.Invalidate();
