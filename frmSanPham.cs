@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using qlShop.models;
+using qlShop.qlshop_model;
 using System;
 using System.Windows.Forms;
 namespace qlShop
@@ -104,15 +105,17 @@ namespace qlShop
             {
                 gridView1.Columns[i].Visible = true;
             }
+            gridView1.IndicatorWidth = 40;
             gridView1.ActiveFilterString = "[NgungKinhDoanh]=false";
             gridView1.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
-
+            gridView1.OptionsView.ColumnAutoWidth = false;
             gr_btn_del.Buttons[1].Visible = false;//Ẩn nút kinh doanh lại - vì mặc định đang hiển thị các sp kinh doanh
         }
 
         private void LayDuLieu()
         {
             gridControl1.DataSource = SanPhamController.GetAllList();
+            gridView1.BestFitColumns();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -291,6 +294,18 @@ namespace qlShop
             f.MdiParent = this.MdiParent;
             f.Show();
             this.Dispose();
+        }
+
+        private void gridView1_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+        {
+            if (e.Info.Kind == DevExpress.Utils.Drawing.IndicatorKind.Header)
+            {
+                e.Info.DisplayText = "STT";
+            }
+            else
+            {
+                e.Info.DisplayText = (e.RowHandle + 1).ToString("00");
+            }
         }
     }
 }

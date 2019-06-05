@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.ApplicationBlocks.Data;
+using qlShop.qlshop_model;
+
 namespace qlShop.models
 {
     static class SanPhamController
@@ -12,27 +14,39 @@ namespace qlShop.models
         static QlShop dbControl = null;
         static public void Add(SanPham item)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
+            dbControl = new QlShop();
+            // nhung truong có gia trị mac định
+
+            if (item.NgayKhoiTao is null) item.NgayKhoiTao = DateTime.Now;
+            if (item.NgungKinhDoanh is null) item.NgungKinhDoanh = false;
+            if (item.ChoXuatAm is null) item.ChoXuatAm = true;
+            if (item.TonKhoiTao is null) item.TonKhoiTao = 0;
+            if (item.SLTonKho is null) item.SLTonKho = 0;
+            if (item.ThuaVAT is null) item.ThuaVAT = 0;
+            if (item.GiaVon is null) item.GiaVon = 0;
+            if (item.GiaBan is null) item.GiaBan = 0;
+
+            //----------------------------------------------------------------------------
             //item.TonKhoiTao = item.SLTonKho;
             //item.NgayKhoiTao = DateTime.Now;
-            dbControl.SanPham.InsertOnSubmit(item);
-            dbControl.SubmitChanges();
+            dbControl.SanPhams.Add(item);
+            dbControl.SaveChanges();
         }
         static public void Del(string strSanPhamID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            SanPham DelItem = dbControl.SanPham.SingleOrDefault(p => p.SanPhamID == strSanPhamID);
+            dbControl = new QlShop();
+            SanPham DelItem = dbControl.SanPhams.SingleOrDefault(p => p.SanPhamID == strSanPhamID);
             if (DelItem!=null)
             {
-                dbControl.SanPham.DeleteOnSubmit(DelItem);
-                dbControl.SubmitChanges();
+                dbControl.SanPhams.Remove(DelItem);
+                dbControl.SaveChanges();
             }
         }
         static public void Edit(SanPham item)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
+            dbControl = new QlShop();
             SanPham oItem = new SanPham();
-            oItem = dbControl.SanPham.SingleOrDefault(p => p.SanPhamID == item.SanPhamID);
+            oItem = dbControl.SanPhams.SingleOrDefault(p => p.SanPhamID == item.SanPhamID);
             if (oItem!=null)
             {
                 oItem.TenSanPham = item.TenSanPham;
@@ -50,15 +64,15 @@ namespace qlShop.models
                 oItem.NguoiDungID = Utility.NguoiSuDung.NguoiDungID;
                 oItem.TenNguoiDung = Utility.NguoiSuDung.TenNguoiDung;
                 oItem.LastUpdate = DateTime.Now;
-                dbControl.SubmitChanges();
+                dbControl.SaveChanges();
             }
             dbControl.Dispose();
         }
 
         static public int GetTonKho(string strSanPhamID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            SanPham Item = dbControl.SanPham.SingleOrDefault(p => p.SanPhamID == strSanPhamID);
+            dbControl = new QlShop();
+            SanPham Item = dbControl.SanPhams.SingleOrDefault(p => p.SanPhamID == strSanPhamID);
             if (Item!=null)
             {
                 return (int)Item.SLTonKho;
@@ -71,8 +85,8 @@ namespace qlShop.models
 
         static public int GetGiaVon(string strSanPhamID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            SanPham Item = dbControl.SanPham.SingleOrDefault(p => p.SanPhamID == strSanPhamID);
+            dbControl = new QlShop();
+            SanPham Item = dbControl.SanPhams.SingleOrDefault(p => p.SanPhamID == strSanPhamID);
             if (Item != null)
             {
                 return  (int)Item.GiaVon;
@@ -88,22 +102,22 @@ namespace qlShop.models
         /// <param name="strSanPhamID">Ma san pham muốn ngừng kinh doanh</param>
         static public void SetTrangThaiKinhDoanh(string strSanPhamID,bool bTrangThai)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            SanPham oItem = dbControl.SanPham.SingleOrDefault(p => p.SanPhamID == strSanPhamID);
+            dbControl = new QlShop();
+            SanPham oItem = dbControl.SanPhams.SingleOrDefault(p => p.SanPhamID == strSanPhamID);
             if (oItem != null)
             {
                 oItem.NgungKinhDoanh = bTrangThai;
                 oItem.NguoiDungID = Utility.NguoiSuDung.NguoiDungID;
                 oItem.TenNguoiDung = Utility.NguoiSuDung.TenNguoiDung;
                 oItem.LastUpdate = DateTime.Now;
-                dbControl.SubmitChanges();
+                dbControl.SaveChanges();
             }
         }
 
         static public SanPham GetItem(string strSanPhamID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            return dbControl.SanPham.SingleOrDefault(p => p.SanPhamID == strSanPhamID);
+            dbControl = new QlShop();
+            return dbControl.SanPhams.SingleOrDefault(p => p.SanPhamID == strSanPhamID);
         }
         static public DataTable GetAllList()
         {
@@ -126,8 +140,8 @@ namespace qlShop.models
         /// <returns> true/false</returns>
         static public bool IsExitsItem(string intSanPhamID)
         { 
-            dbControl = new QlShop(Utility.GetConnectString());
-            return dbControl.SanPham.SingleOrDefault(p => p.SanPhamID == intSanPhamID) == null ? false : true;
+            dbControl = new QlShop();
+            return dbControl.SanPhams.SingleOrDefault(p => p.SanPhamID == intSanPhamID) == null ? false : true;
         }
         /// <summary>
         /// Tao ma san pham tu dong với tiền tố và độ dài tham số truyền vào
@@ -146,11 +160,11 @@ namespace qlShop.models
 
         static public void CapNhatTonKho(string strSanPhamID, int intSoLuong)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
+            dbControl = new QlShop();
             SanPham oItem = new SanPham();
-            oItem = dbControl.SanPham.SingleOrDefault(p => p.SanPhamID == strSanPhamID);
+            oItem = dbControl.SanPhams.SingleOrDefault(p => p.SanPhamID == strSanPhamID);
             oItem.SLTonKho = oItem.SLTonKho - intSoLuong;
-            dbControl.SubmitChanges();
+            dbControl.SaveChanges();
         }
     }
 }

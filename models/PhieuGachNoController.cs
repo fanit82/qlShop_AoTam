@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.ApplicationBlocks.Data;
+using qlShop.qlshop_model;
 
 namespace qlShop.models
 {
@@ -15,13 +16,13 @@ namespace qlShop.models
         static QlShop dbControl = null;
         static public void Add(PhieuGachNo item, List<PhieuGachNoChiTiet> items)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
+            dbControl = new QlShop();
             using (TransactionScope scope = new TransactionScope())
             {
                 item.CreateDate = DateTime.Now;
                 item.LastUpdate = DateTime.Now;
-                dbControl.PhieuGachNo.InsertOnSubmit(item);
-                dbControl.PhieuGachNoChiTiet.InsertAllOnSubmit(items);
+                dbControl.PhieuGachNoes.Add(item);
+                dbControl.PhieuGachNoChiTiets.AddRange(items);
 
                 foreach (PhieuGachNoChiTiet iPhieus in items)
                 {
@@ -39,7 +40,7 @@ namespace qlShop.models
                 //{
                 //    KhachHangController.CapNhatCongNo_MuaHang(item.KhachHangID, item.ConNo, item.TongCong);
                 //}
-                dbControl.SubmitChanges();
+                dbControl.SaveChanges();
                 scope.Complete();
             }
         }

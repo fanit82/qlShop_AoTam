@@ -1,4 +1,5 @@
 ﻿using qlShop.models;
+using qlShop.qlshop_model;
 using System;
 using System.Windows.Forms;
 

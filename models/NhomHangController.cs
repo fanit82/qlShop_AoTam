@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.ApplicationBlocks.Data;
+using qlShop.qlshop_model;
+
 namespace qlShop.models
 {
     static class NhomHangController
@@ -11,9 +13,9 @@ namespace qlShop.models
         static QlShop dbControl = null;
         static public int Add(NhomHang item)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            dbControl.NhomHang.InsertOnSubmit(item);
-            dbControl.SubmitChanges();
+            dbControl = new QlShop();
+            dbControl.NhomHangs.Add(item);
+            dbControl.SaveChanges();
             return item.NhomHangID;
         }
         static public DataTable Getlist()
@@ -23,12 +25,12 @@ namespace qlShop.models
 
         static public void Del(int intNhomHangID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            NhomHang delItem = dbControl.NhomHang.SingleOrDefault(p=>p.NhomHangID==intNhomHangID);
+            dbControl = new QlShop();
+            NhomHang delItem = dbControl.NhomHangs.SingleOrDefault(p=>p.NhomHangID==intNhomHangID);
             if (delItem!=null)
 	        {
-		        dbControl.NhomHang.DeleteOnSubmit(delItem);
-                dbControl.SubmitChanges();
+		        dbControl.NhomHangs.Remove(delItem);
+                dbControl.SaveChanges();
 	        }            
         }
 

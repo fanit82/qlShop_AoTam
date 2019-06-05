@@ -7,6 +7,8 @@ using System.Linq;
 using System.Windows.Forms;
 using qlShop.models;
 using qlShop.reports;
+using qlShop.qlshop_model;
+
 namespace qlShop
 {
     public partial class frmAddDonHang : Form
@@ -291,6 +293,7 @@ namespace qlShop
 
         private void Save()
         {
+
             using (TransactionScope scope = new TransactionScope())
             {
 
@@ -558,7 +561,7 @@ namespace qlShop
             rp.SetParameterValue("TenShop", shop.TenShop);
             rp.SetParameterValue("DiaChi", shop.DiaChi);
             rp.SetParameterValue("SoDienThoai", shop.SoDienThoai);
-            rp.SetParameterValue("WebSite", shop.Website);
+            rp.SetParameterValue("WebSite", shop.website);
             frmViewReports fReport = null;
             foreach (Form item in MdiChildren)
             {

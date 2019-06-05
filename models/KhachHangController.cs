@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.ApplicationBlocks.Data;
+using qlShop.qlshop_model;
 
 namespace qlShop.models
 {
@@ -13,23 +14,23 @@ namespace qlShop.models
         static QlShop dbControl = null;
         static public void Add(KhachHang item)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
+            dbControl = new QlShop();
             item.CongNo = 0;
             item.TongTienHang = 0;
-            dbControl.KhachHang.InsertOnSubmit(item);
-            dbControl.SubmitChanges();
+            dbControl.KhachHangs.Add(item);
+            dbControl.SaveChanges();
         }
         static public KhachHang GetItem(string strKhachHangID)
         { 
-            dbControl = new QlShop(Utility.GetConnectString());
-            return dbControl.KhachHang.SingleOrDefault(p => p.KhachHangID == strKhachHangID);
+            dbControl = new QlShop();
+            return dbControl.KhachHangs.SingleOrDefault(p => p.KhachHangID == strKhachHangID);
         }
 
         static public void Edit(KhachHang item)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
+            dbControl = new QlShop();
             KhachHang oItem = new KhachHang();
-            oItem = dbControl.KhachHang.SingleOrDefault(p => p.KhachHangID == item.KhachHangID);
+            oItem = dbControl.KhachHangs.SingleOrDefault(p => p.KhachHangID == item.KhachHangID);
             if (oItem!=null)
             {
                 oItem.TenKhachHang = item.TenKhachHang;
@@ -42,19 +43,19 @@ namespace qlShop.models
                 oItem.NguoiDungID = Utility.NguoiSuDung.NguoiDungID;
                 oItem.TenNguoiDung = Utility.NguoiSuDung.TenNguoiDung;
                 oItem.LastUpdate = DateTime.Now;
-                dbControl.SubmitChanges();
+                dbControl.SaveChanges();
             }
             dbControl.Dispose();
         }
         static public void DelItem(string strKhachHangID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
+            dbControl = new QlShop();
             KhachHang oItem = new KhachHang();
-            oItem = dbControl.KhachHang.SingleOrDefault(p => p.KhachHangID == strKhachHangID);
+            oItem = dbControl.KhachHangs.SingleOrDefault(p => p.KhachHangID == strKhachHangID);
             if (oItem!=null)
             {
-                dbControl.KhachHang.DeleteOnSubmit(oItem);
-                dbControl.SubmitChanges();
+                dbControl.KhachHangs.Remove(oItem);
+                dbControl.SaveChanges();
             }
             dbControl.Dispose();
         }
@@ -67,8 +68,8 @@ namespace qlShop.models
 
         static public bool IsExitsItem(string KhachHangID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            return dbControl.KhachHang.SingleOrDefault(p => p.KhachHangID == KhachHangID) == null ? false : true;
+            dbControl = new QlShop();
+            return dbControl.KhachHangs.SingleOrDefault(p => p.KhachHangID == KhachHangID) == null ? false : true;
         }
 
         static public string TaoMaKhachHang(string strPrefix, int intLeng)
@@ -82,23 +83,23 @@ namespace qlShop.models
 
         static public void CapNhatCongNo_MuaHang(string strKhachHangID, decimal decTienNo,decimal decTienHang)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
+            dbControl = new QlShop();
             KhachHang oItem = new KhachHang();
-            oItem = dbControl.KhachHang.SingleOrDefault(p => p.KhachHangID == strKhachHangID);
+            oItem = dbControl.KhachHangs.SingleOrDefault(p => p.KhachHangID == strKhachHangID);
             oItem.CongNo = oItem.CongNo + decTienNo;
             oItem.TongTienHang = oItem.TongTienHang + decTienHang;
-            dbControl.SubmitChanges();
+            dbControl.SaveChanges();
         }
 
         static public void GachNo(string strKhachHangID, decimal decSoTien)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
+            dbControl = new QlShop();
             KhachHang oItem = null;
-            oItem = dbControl.KhachHang.SingleOrDefault(p => p.KhachHangID == strKhachHangID);
+            oItem = dbControl.KhachHangs.SingleOrDefault(p => p.KhachHangID == strKhachHangID);
             if (oItem!=null)
             {
                 oItem.CongNo -= decSoTien;
-                dbControl.SubmitChanges();
+                dbControl.SaveChanges();
             }
         }
 

@@ -24,7 +24,7 @@ namespace qlShop.models
                 item.NguoiDungID = Utility.NguoiSuDung.NguoiDungID;
                 item.TenNguoiDung = Utility.NguoiSuDung.TenNguoiDung;
                 //dbControl.ChiPhi.InsertOnSubmit(item);
-                dbControl.ChiPhis.Add()
+                dbControl.ChiPhis.Add(item);
                 dbControl.SaveChanges();
                 QuyTienMatController.XuatQuyTienMat(item.ChiPhiID.ToString(), item.NgayChi, item.SoTien, "CP", "TT chi phí");
                 Tscope.Complete();
@@ -33,20 +33,20 @@ namespace qlShop.models
         }
         static public void Del(int intChiPhiID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            ChiPhi DelItem = dbControl.ChiPhi.SingleOrDefault(p => p.ChiPhiID == intChiPhiID);
+            dbControl = new QlShop();
+            ChiPhi DelItem = dbControl.ChiPhis.SingleOrDefault(p => p.ChiPhiID == intChiPhiID);
             if (DelItem != null)
             {
-                dbControl.ChiPhi.DeleteOnSubmit(DelItem);
-                dbControl.SubmitChanges();
+                dbControl.ChiPhis.Remove(DelItem);
+                dbControl.SaveChanges();
             }
         }
 
         static public void Edit(ChiPhi item)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
+            dbControl = new QlShop();
             ChiPhi oItem = new ChiPhi();
-            oItem = dbControl.ChiPhi.SingleOrDefault(p => p.ChiPhiID == item.ChiPhiID);
+            oItem = dbControl.ChiPhis.SingleOrDefault(p => p.ChiPhiID == item.ChiPhiID);
             if (oItem != null)
             {
                 oItem.TenChiPhi = item.TenChiPhi;
@@ -59,15 +59,15 @@ namespace qlShop.models
                 oItem.NguoiDungID = Utility.NguoiSuDung.NguoiDungID;
                 oItem.TenNguoiDung = Utility.NguoiSuDung.TenNguoiDung;
                 oItem.LastUpdate = DateTime.Now;
-                dbControl.SubmitChanges();
+                dbControl.SaveChanges();
             }
             dbControl.Dispose();
         }
 
         static public ChiPhi GetITem(int intChiPhiID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            return dbControl.ChiPhi.SingleOrDefault(p => p.ChiPhiID == intChiPhiID);
+            dbControl = new QlShop();
+            return dbControl.ChiPhis.SingleOrDefault(p => p.ChiPhiID == intChiPhiID);
         }
         static public DataTable GetAllList()
         {

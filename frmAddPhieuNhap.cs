@@ -1,4 +1,5 @@
 ﻿using qlShop.models;
+using qlShop.qlshop_model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -267,11 +268,6 @@ namespace qlShop
                 f.Dispose();
             }
         }
-
-
-
-
-
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode== Keys.Enter)

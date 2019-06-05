@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.ApplicationBlocks.Data;
+using qlShop.qlshop_model;
+using System.Data.Entity;
+
 namespace qlShop.models
 {
     class QuyTienMatController
@@ -17,9 +20,9 @@ namespace qlShop.models
             QuyTienMat item = null;
             using (TransactionScope TSCope = new TransactionScope())
             {
-                dbControl = new QlShop(Utility.GetConnectString());
+                dbControl = new QlShop();
                 //kiểm tra nếu ngày hiện tại chưa có tiền trong quỹ thì làm thao tác kết chuyển ngày.                
-                if (dbControl.QuyTienMat.FirstOrDefault(p => p.Ngay_ThaoTac.Date == dtNgayChungTu.Date) == null)
+                if (dbControl.QuyTienMats.FirstOrDefault(p => DbFunctions.TruncateTime(p.Ngay_ThaoTac) == DbFunctions.TruncateTime(dtNgayChungTu)) == null)
                 {
                     item = new QuyTienMat();
                     item.Ngay_ThaoTac = DateTime.Now;
@@ -29,7 +32,7 @@ namespace qlShop.models
                     item.TienNhap = QuyTienMatController.TienTrongQuyHienTai();
                     item.TienXuat = 0;
                     item.GhiChu = "Kết chuyển tiền qua ngày";
-                    dbControl.QuyTienMat.InsertOnSubmit(item);
+                    dbControl.QuyTienMats.Add(item);
                 }
                 item = new QuyTienMat();
                 item.ChungTu_ID = ChungTuID;
@@ -41,19 +44,19 @@ namespace qlShop.models
                 item.TienDauKy = TienTrongQuyHienTai();
                 item.TienCuoiKy = item.TienDauKy + item.TienNhap;
                 item.Ngay_ThaoTac = DateTime.Now;
-                dbControl.QuyTienMat.InsertOnSubmit(item);
-                dbControl.SubmitChanges();
+                dbControl.QuyTienMats.Add(item);
+                dbControl.SaveChanges();
                 TSCope.Complete();
             }
         }
         static public void XuatQuyTienMat(string ChungTuID, DateTime dtNgayChungTu, decimal dcSoTien, string strPhanLoai,
     string strGhiChu)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
+            dbControl = new QlShop();
             QuyTienMat item = null;
             using (TransactionScope TSCope = new TransactionScope())
             {
-                if (dbControl.QuyTienMat.FirstOrDefault(p => p.Ngay_ThaoTac.Date == dtNgayChungTu.Date) == null)
+                if (dbControl.QuyTienMats.FirstOrDefault(p =>DbFunctions.TruncateTime(p.Ngay_ThaoTac) ==DbFunctions.TruncateTime(dtNgayChungTu)) == null)
                 {
                     item = new QuyTienMat();
                     item.Ngay_ThaoTac = DateTime.Now;
@@ -63,7 +66,7 @@ namespace qlShop.models
                     item.TienNhap = QuyTienMatController.TienTrongQuyHienTai();
                     item.TienXuat = 0;
                     item.GhiChu = "Kết chuyển tiền qua ngày";
-                    dbControl.QuyTienMat.InsertOnSubmit(item);
+                    dbControl.QuyTienMats.Add(item);
                 }
                 item = new QuyTienMat();
                 item.ChungTu_ID = ChungTuID;
@@ -75,8 +78,8 @@ namespace qlShop.models
                 item.TienDauKy = TienTrongQuyHienTai();
                 item.TienCuoiKy = item.TienDauKy - item.TienXuat;
                 item.Ngay_ThaoTac = DateTime.Now;
-                dbControl.QuyTienMat.InsertOnSubmit(item);
-                dbControl.SubmitChanges();
+                dbControl.QuyTienMats.Add(item);
+                dbControl.SaveChanges();
                 TSCope.Complete();
             }
 

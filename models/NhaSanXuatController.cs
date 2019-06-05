@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.ApplicationBlocks.Data;
+using qlShop.qlshop_model;
+
 namespace qlShop.models
 {
     class NhaSanXuatController
@@ -11,9 +13,9 @@ namespace qlShop.models
         static QlShop dbControl = null;
         static public int Add(NhaSanXuat item)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            dbControl.NhaSanXuat.InsertOnSubmit(item);
-            dbControl.SubmitChanges();
+            dbControl = new QlShop();
+            dbControl.NhaSanXuats.Add(item);
+            dbControl.SaveChanges();
             return item.NhaSanXuatID;
         }
         static public DataTable GetList()
@@ -22,12 +24,12 @@ namespace qlShop.models
         }
         static public void Del(int intNhaSanXuatID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            NhaSanXuat item = dbControl.NhaSanXuat.SingleOrDefault(p => p.NhaSanXuatID == intNhaSanXuatID);
+            dbControl = new QlShop();
+            NhaSanXuat item = dbControl.NhaSanXuats.SingleOrDefault(p => p.NhaSanXuatID == intNhaSanXuatID);
             if (item !=null)
             {
-                dbControl.NhaSanXuat.DeleteOnSubmit(item);
-                dbControl.SubmitChanges();
+                dbControl.NhaSanXuats.Remove(item);
+                dbControl.SaveChanges();
             }
         }
     }

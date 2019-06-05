@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.ApplicationBlocks.Data;
+using qlShop.qlshop_model;
+
 namespace qlShop.models
 {
     static public class NguoiDungController
@@ -13,59 +15,59 @@ namespace qlShop.models
 
         static public void Add(NguoiDung item)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
+            dbControl = new QlShop();
             item.CreateDate = DateTime.Now;            
-            dbControl.NguoiDung.InsertOnSubmit(item);
-            dbControl.SubmitChanges();
+            dbControl.NguoiDungs.Add(item);
+            dbControl.SaveChanges();
         }
 
         static public void Edit(NguoiDung item)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
+            dbControl = new QlShop();
             NguoiDung oItem = new NguoiDung();
-            oItem = dbControl.NguoiDung.SingleOrDefault(p => p.NguoiDungID == item.NguoiDungID);
+            oItem = dbControl.NguoiDungs.SingleOrDefault(p => p.NguoiDungID == item.NguoiDungID);
             if (oItem != null)
             {
                 oItem.TenNguoiDung = item.TenNguoiDung;
                 oItem.Roles = item.Roles;
                 oItem.MatKhau = item.MatKhau;
                 oItem.LastUpdate = DateTime.Now;
-                dbControl.SubmitChanges();
+                dbControl.SaveChanges();
             }
             dbControl.Dispose();
         }
 
         static public void Del(string strNguoiDung)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            NguoiDung DelItem = dbControl.NguoiDung.SingleOrDefault(p => p.NguoiDungID == strNguoiDung);
+            dbControl = new QlShop();
+            NguoiDung DelItem = dbControl.NguoiDungs.SingleOrDefault(p => p.NguoiDungID == strNguoiDung);
             if (DelItem != null)
             {
-                dbControl.NguoiDung.DeleteOnSubmit(DelItem);
-                dbControl.SubmitChanges();
+                dbControl.NguoiDungs.Remove(DelItem);
+                dbControl.SaveChanges();
             }
         }
         static public NguoiDung GetItem(string strNguoiDungID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            return dbControl.NguoiDung.SingleOrDefault(p => p.NguoiDungID == strNguoiDungID);
+            dbControl = new QlShop();
+            return dbControl.NguoiDungs.SingleOrDefault(p => p.NguoiDungID == strNguoiDungID);
             
         }
         static public NguoiDung ChungThuc(string strUser, string Pass)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            return dbControl.NguoiDung.SingleOrDefault(p => p.NguoiDungID == strUser && p.MatKhau == Pass); 
+            dbControl = new QlShop();
+            return dbControl.NguoiDungs.SingleOrDefault(p => p.NguoiDungID == strUser && p.MatKhau == Pass); 
         }
 
         static public void DoiPass(string strNguoiDungID,string strNewPass)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
+            dbControl = new QlShop();
             NguoiDung oItem = new NguoiDung();
-            oItem = dbControl.NguoiDung.SingleOrDefault(p => p.NguoiDungID == strNguoiDungID);
+            oItem = dbControl.NguoiDungs.SingleOrDefault(p => p.NguoiDungID == strNguoiDungID);
             if (oItem != null)
             {
                 oItem.MatKhau = strNewPass;
-                dbControl.SubmitChanges();
+                dbControl.SaveChanges();
             }
             dbControl.Dispose();
         }

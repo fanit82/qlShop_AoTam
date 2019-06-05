@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using qlShop.qlshop_model;
 using Microsoft.ApplicationBlocks.Data;
 
 namespace qlShop.models
@@ -13,20 +14,20 @@ namespace qlShop.models
         static QlShop dbControl = null;
         static public int Add(LoaiChiPhi item)
         {
-            dbControl = new QlShop(Utility.GetConnectString());            
-            dbControl.LoaiChiPhi.InsertOnSubmit(item);
-            dbControl.SubmitChanges();
+            dbControl = new QlShop();            
+            dbControl.LoaiChiPhis.Add(item);
+            dbControl.SaveChanges();
             return item.LoaiChiPhiID;
         }
 
         static public void Del(int intLoaiChiPhiID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            LoaiChiPhi DelItem = dbControl.LoaiChiPhi.SingleOrDefault(p => p.LoaiChiPhiID == intLoaiChiPhiID);
+            dbControl = new QlShop();
+            LoaiChiPhi DelItem = dbControl.LoaiChiPhis.SingleOrDefault(p => p.LoaiChiPhiID == intLoaiChiPhiID);
             if (DelItem != null)
             {
-                dbControl.LoaiChiPhi.DeleteOnSubmit(DelItem);
-                dbControl.SubmitChanges();
+                dbControl.LoaiChiPhis.Remove(DelItem);
+                dbControl.SaveChanges();
             }
         }
 

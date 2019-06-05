@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.ApplicationBlocks.Data;
+using qlShop.qlshop_model;
 
 namespace qlShop.models
 {
@@ -15,7 +16,7 @@ namespace qlShop.models
         static QlShop dbControl = null;        
         static public void Add(DonHang item,List<DonHangChiTiet> items)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
+            dbControl = new QlShop();
             using (TransactionScope scope = new TransactionScope())
             {
                 //cap nhat so luong ton kho thuc te luc xuat
@@ -26,8 +27,8 @@ namespace qlShop.models
                     //SanPhamController.CapNhatTonKho(DonHangItem.SanPhamID, DonHangItem.SoLuong);
                 }
                
-                dbControl.DonHang.InsertOnSubmit(item);                
-                dbControl.DonHangChiTiet.InsertAllOnSubmit(items);
+                dbControl.DonHangs.Add(item);                
+                dbControl.DonHangChiTiets.AddRange(items);
 
                 //cap nhat so luong ton kho
 
@@ -61,7 +62,7 @@ namespace qlShop.models
 
                 QuyTienMatController.NhapQuyTienMat(item.DonHangID, item.NgayBan, decTienMatThu, "BH", "Tiền mặt bán hàng");
                 //------------------end-------------
-                dbControl.SubmitChanges();
+                dbControl.SaveChanges();
                 scope.Complete();
             }            
         }
@@ -72,13 +73,13 @@ namespace qlShop.models
         /// <param name="strDonHangID">Don hang ID</param>
         static public void Del(string strDonHangID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            DonHang DelItem = dbControl.DonHang.SingleOrDefault(p => p.DonHangID == strDonHangID);
+            dbControl = new QlShop();
+            DonHang DelItem = dbControl.DonHangs.SingleOrDefault(p => p.DonHangID == strDonHangID);
             if (DelItem!=null)
             {
                 //lay danh sach san pham cua don hang
                 List<DonHangChiTiet> ListSanPham = new List<DonHangChiTiet>();
-                ListSanPham = (from p in dbControl.DonHangChiTiet
+                ListSanPham = (from p in dbControl.DonHangChiTiets
                              where p.DonHangID == strDonHangID
                              select p).ToList<DonHangChiTiet>();
                 using (TransactionScope scope = new TransactionScope())
@@ -93,9 +94,9 @@ namespace qlShop.models
                     {
                         KhachHangController.CapNhatCongNo_MuaHang(DelItem.KhachHangID, 0 - DelItem.ConNo, 0 - DelItem.TongCong);
                     }
-                    dbControl.DonHang.DeleteOnSubmit(DelItem);
-                    dbControl.DonHangChiTiet.DeleteAllOnSubmit(ListSanPham);
-                    dbControl.SubmitChanges();
+                    dbControl.DonHangs.Remove(DelItem);
+                    dbControl.DonHangChiTiets.RemoveRange(ListSanPham);
+                    dbControl.SaveChanges();
                     scope.Complete();
                 }             
             }
@@ -103,8 +104,8 @@ namespace qlShop.models
 
         static public DonHang GetItem(string strDonHangID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            return dbControl.DonHang.SingleOrDefault(p => p.DonHangID == strDonHangID);
+            dbControl = new QlShop();
+            return dbControl.DonHangs.SingleOrDefault(p => p.DonHangID == strDonHangID);
         }
 
         static public DataTable GetSanPham(string strDonHangID)
@@ -117,7 +118,7 @@ namespace qlShop.models
         static public List<DonHangChiTiet> GetListSanPham(string strDonHangID)
         {
             List<DonHangChiTiet> ListItems = new List<DonHangChiTiet>();
-            ListItems = (from p in dbControl.DonHangChiTiet
+            ListItems = (from p in dbControl.DonHangChiTiets
                        where p.DonHangID == strDonHangID
                        select p).ToList<DonHangChiTiet>();
             return ListItems;
@@ -167,12 +168,12 @@ namespace qlShop.models
 
         static public void GachNo(string strDonHangID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            DonHang item = dbControl.DonHang.SingleOrDefault(p => p.DonHangID == strDonHangID);
+            dbControl = new QlShop();
+            DonHang item = dbControl.DonHangs.SingleOrDefault(p => p.DonHangID == strDonHangID);
             if (item!=null)
             {
                 item.ConNo = 0;
-                dbControl.SubmitChanges();
+                dbControl.SaveChanges();
             }
         }
 

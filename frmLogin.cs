@@ -1,7 +1,9 @@
 ﻿using qlShop.models;
+using qlShop.qlshop_model;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace qlShop
@@ -44,7 +46,7 @@ namespace qlShop
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Kết nối database lỗi, xin kiểm tra lại kết nối \\n" + ex.Message);
+                MessageBox.Show("Kết nối database lỗi, xin kiểm tra lại kết nối \n\n" + ex.Message);
                 return;
             }
             
@@ -57,6 +59,7 @@ namespace qlShop
         private void pictureEdit1_DoubleClick(object sender, EventArgs e)
         {
             frmConfigDatabase f = new frmConfigDatabase();
+            //frmConfigDatabase2 f = new frmConfigDatabase2();
             if (f.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 LayThongTinKetNoiCSDL();
@@ -68,11 +71,11 @@ namespace qlShop
             DataSet DsXML = new DataSet();
             string strPathFile = Application.StartupPath + "/configapp.xml";
             lbKetNoi.Text = "Chưa cấu hình có kết nối CSDL";
-            //DataSet dsXML = new DataSet();
+            DataSet dsXML = new DataSet();
             if (System.IO.File.Exists(strPathFile))
             {
                 DsXML.ReadXml(strPathFile);
-                if (DsXML.Tables[0] !=null)
+                if (DsXML.Tables[0] != null)
                 {
                     DataTable tblXML = DsXML.Tables[0];
                     if (tblXML.Rows.Count > 0)
@@ -81,27 +84,42 @@ namespace qlShop
                         {
                             if (Convert.ToBoolean(item["Default"].ToString()))
                             {
-                                SqlConnectionStringBuilder sqlcnnbuild = new SqlConnectionStringBuilder();
-                                sqlcnnbuild.DataSource = item["Server_name"].ToString();
-                                sqlcnnbuild.InitialCatalog = item["database_name"].ToString();
-                                sqlcnnbuild.IntegratedSecurity = Convert.ToBoolean(item["windows_Auth"].ToString());
-                                sqlcnnbuild.UserID = item["user_name"].ToString();
-                                sqlcnnbuild.Password = item["password"].ToString();
+                                //SqlConnectionStringBuilder sqlcnnbuild = new SqlConnectionStringBuilder();
+                                //sqlcnnbuild.DataSource = item["Server_name"].ToString();
+                                //sqlcnnbuild.InitialCatalog = item["database_name"].ToString();
+                                //sqlcnnbuild.IntegratedSecurity = Convert.ToBoolean(item["windows_Auth"].ToString());
+                                //sqlcnnbuild.UserID = item["user_name"].ToString();
+                                //sqlcnnbuild.Password = item["password"].ToString();
+                                string connectionString = string.Format("Data Source={0};" +
+                                    "Initial Catalog={1};" +
+                                    "Integrated Security={2};" +
+                                    "User ID={3};" +
+                                    "Password={4};" +
+                                    "MultipleActiveResultSets=True;" +
+                                    "App=EntityFramework",
+                                    item["Server_name"].ToString(),
+                                    item["database_name"].ToString(),
+                                    Convert.ToBoolean(item["windows_Auth"].ToString()),
+                                    item["user_name"].ToString(),
+                                    item["password"].ToString());
                                 lbKetNoi.Text = "Đang kết nối CSDL: " + item["Connect_name"].ToString();
-                                Utility.strConnectString = sqlcnnbuild.ConnectionString;
+                                Utility.strConnectString = connectionString;
                                 Utility.TenKetNoi = item["Connect_name"].ToString();
+                                //save kết nối vô appconfig
+                                new AppSetting().SaveConnectionString(Utility.KeyConnectString, connectionString);
                                 //sqlcnn.ConnectionString = sqlcnnbuild.ConnectionString;
                             }
                         }
                     }
                 }
-            }                 
+            }
         }
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
             LayThongTinKetNoiCSDL();
-            groupControl1.Text = "Hệ thống quản lý bán hàng - Version 1.3 - cập nhật 18/12/2015";
+            groupControl1.Text =string.Format("Hệ thống quản lý bán hàng - Phiên bản : {0} - cập nhật 03/06/2019",
+                Assembly.GetExecutingAssembly().GetName().Version.ToString());           
         }
 
         private void frmLogin_FormClosed(object sender, FormClosedEventArgs e)

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using qlShop.models;
+using qlShop.qlshop_model;
+
 namespace qlShop
 {
     public partial class frmTraHang : Form

@@ -1,4 +1,5 @@
 ﻿using qlShop.models;
+using qlShop.qlshop_model;
 using qlShop.reports;
 using System;
 using System.Windows.Forms;
@@ -184,7 +185,7 @@ namespace qlShop
                         rp.SetParameterValue("TenShop", shop.TenShop);
                         rp.SetParameterValue("DiaChi", shop.DiaChi);
                         rp.SetParameterValue("SoDienThoai", shop.SoDienThoai);
-                        rp.SetParameterValue("WebSite", shop.Website);
+                        rp.SetParameterValue("WebSite", shop.website);
                         frmViewReports fReport =  null;
                         foreach (Form item in MdiChildren)
                         {

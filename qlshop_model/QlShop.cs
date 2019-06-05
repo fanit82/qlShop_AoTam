@@ -8,7 +8,7 @@ namespace qlShop.qlshop_model
     public partial class QlShop : DbContext
     {
         public QlShop()
-            : base("name=QlShop_cnn")
+            : base("name=QlShop")
         {
         }
 

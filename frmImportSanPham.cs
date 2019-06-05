@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using qlShop.models;
+using qlShop.qlshop_model;
 
 namespace qlShop
 {
@@ -16,6 +17,7 @@ namespace qlShop
         {
             InitializeComponent();
             txtFileName.ReadOnly = true;
+            gridView1.IndicatorWidth = 40;
         }
 
         private void btnOpenFile_Click(object sender, EventArgs e)
@@ -27,23 +29,13 @@ namespace qlShop
             if (fileDialog.ShowDialog()== DialogResult.OK)
             {
                 txtFileName.Text = fileDialog.FileName;
+                var DS = Utility.ImportExcelXLS(txtFileName.Text, true);
+                DS.Tables[0].Columns.Add(new DataColumn("ERROR", typeof(String)));//add thêm cột này để xem lỗi;
+                gridControl1.DataSource = DS.Tables[0];
+                gridView1.OptionsView.ColumnAutoWidth = false;
+                gridView1.BestFitColumns();
+                //gridView1.DataSource = DS;                
             }
-        }
-
-        private void btn_load_Click(object sender, EventArgs e)
-        {
-            if (txtFileName.Text == string.Empty)
-            {
-                return;
-            }
-            string strFileOpen = string.Empty;
-            strFileOpen = txtFileName.Text;
-            var DS = Utility.ImportExcelXLS(strFileOpen, true);
-            DS.Tables[0].Columns.Add(new DataColumn("ERROR", typeof(String)));//add thêm cột này để xem lỗi;
-            gridControl1.DataSource = DS.Tables[0];
-            gridView1.BestFitColumns();
-            //gridView1.DataSource = DS;
-            lblStatus.Text = string.Format("Tổng số dòng là: {0}", gridView1.RowCount);
         }
 
         private void btn_save_Click(object sender, EventArgs e)
@@ -53,59 +45,92 @@ namespace qlShop
                 int intTotalRow = gridView1.RowCount;
                 int i = 1;
                 int intDongXL = 0;
+                splashScreenManager1.ShowWaitForm();
+                splashScreenManager1.SetWaitFormCaption("Đợi xíu...");
                 while (gridView1.RowCount> intDongXL) //xử lý từng dòng, từ dòng đầu tiên
                 {
-                    lblStatus.Text = string.Format("Đang xử lý dòng {0}/{1}",i,intTotalRow);
-                    lblStatus.Invalidate();
-                    lblStatus.Update();                    
+                    splashScreenManager1.SetWaitFormDescription(string.Format("Đang xử lý dòng {0}/{1}", i, intTotalRow));               
                     i++;
                     try
                     {
-                        //kiểm tra dong đó có dữ liệu thì XLy
-                        if (gridView1.GetRowCellValue(0, gridView1.Columns[0]) != null)
+                        //nếu dòng đó có mã và tên sản phẩm thì xử lý
+                        string strID = gridView1.GetRowCellValue(intDongXL, gridView1.Columns[0]).ToString();                        
+                        string strTen = gridView1.GetRowCellValue(intDongXL, gridView1.Columns[1]).ToString();
+                        if ((strID!=string.Empty)&&(strTen!=string.Empty))
                         {
                             SanPham objSanPham = new SanPham();
-                            objSanPham.SanPhamID = gridView1.GetRowCellValue(intDongXL, gridView1.Columns[0]).ToString();
-
-                                                        
-
+                            objSanPham.SanPhamID = strID;
                             string strNhomSize = gridView1.GetRowCellValue(intDongXL, gridView1.Columns[3]).ToString();
                             if (strNhomSize != string.Empty)
                             {
                                 objSanPham.NhomSize = strNhomSize;
-                            }                            
-                            objSanPham.TenSanPham = gridView1.GetRowCellValue(intDongXL, gridView1.Columns[1]).ToString();
+                            }
+                            objSanPham.TenSanPham = strTen;
                             if (gridView1.GetRowCellValue(intDongXL, gridView1.Columns[2])!=null)
                             {
                                 objSanPham.GioTinh = gridView1.GetRowCellValue(intDongXL, gridView1.Columns[2]).ToString();
                             }                            
-                            objSanPham.NhomHangID = null;
-                            objSanPham.GiaBan = Convert.ToInt32(gridView1.GetRowCellValue(intDongXL, gridView1.Columns[5]).ToString());
-                            objSanPham.NgayKhoiTao = DateTime.Now;
-                            objSanPham.DVT = gridView1.GetRowCellValue(intDongXL, gridView1.Columns[7]).ToString();
+                            //objSanPham.NhomHangID = null;
+                            if ((gridView1.GetRowCellValue(intDongXL, gridView1.Columns[5]) != null))
+                            {
+                                int intGiaBan = 0;
+                                if (Int32.TryParse(gridView1.GetRowCellValue(intDongXL, gridView1.Columns[5]).ToString(),out intGiaBan))
+                                {
+                                    objSanPham.GiaBan = intGiaBan;
+                                }
+                                else
+                                {
+                                    objSanPham.GiaBan = 0;
+                                }                                
+                            }
+                            //objSanPham.NgayKhoiTao = DateTime.Now;
+                            if (gridView1.GetRowCellValue(intDongXL, gridView1.Columns[7])!=null)
+                            {
+                                objSanPham.DVT = gridView1.GetRowCellValue(intDongXL, gridView1.Columns[7]).ToString();
+                            }                            
                             objSanPham.NguoiDungID = Utility.NguoiSuDung.NguoiDungID;
                             objSanPham.NgungKinhDoanh = false;
-
                             SanPhamController.Add(objSanPham);
-                            gridView1.DeleteRow(intDongXL);//remove dong đầu tiên   
-                            gridControl1.Invalidate();
-                            gridControl1.Update();
+                            gridView1.DeleteRow(intDongXL);//remove dong dang xly
+                            //gridControl1.Invalidate();
+                            //gridControl1.Update();
+                        }
+                        else
+                        {
+                            gridView1.SetRowCellValue(intDongXL, "ERROR", "Không có mã hoặc tên sản phẩm!");
+                            intDongXL++; //bỏ qua dòng này không xly.
                         }
                     }
                     catch (Exception ex)
                     {
                         gridView1.SetRowCellValue(intDongXL, "ERROR", ex.Message);
-                        gridControl1.Invalidate();
-                        gridControl1.Update();
+                        //gridControl1.Invalidate();
+                        //gridControl1.Update();
                         intDongXL++; //bỏ qua dòng lỗi; xly dòng tiep theo.
                         //throw;
                     }
+                    //làm mới lại lưới
+                    gridControl1.Invalidate();
+                    gridControl1.Update();
                 }
+                splashScreenManager1.CloseWaitForm();
             }
         }
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             gridView1.DeleteRow(0);
+        }
+
+        private void gridView1_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+        {
+            if (e.Info.Kind == DevExpress.Utils.Drawing.IndicatorKind.Header)
+            {
+                e.Info.DisplayText = "STT";
+            }
+            else
+            {
+                e.Info.DisplayText = (e.RowHandle + 1).ToString("00");
+            }
         }
     }
 }

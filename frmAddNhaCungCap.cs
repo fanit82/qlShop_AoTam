@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using qlShop.models;
+using qlShop.qlshop_model;
+
 namespace qlShop
 {
     public partial class frmAddNhaCungCap : Form

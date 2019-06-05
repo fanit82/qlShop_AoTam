@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.ApplicationBlocks.Data;
+using qlShop.qlshop_model;
 
 namespace qlShop.models
 {
@@ -15,11 +16,11 @@ namespace qlShop.models
         static QlShop dbControl = null;
         static public void Add(PhieuNhap item, List<PhieuNhapChiTiet> items)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
+            dbControl = new QlShop();
             using (TransactionScope scope = new TransactionScope())
             {
-                dbControl.PhieuNhap.InsertOnSubmit(item);
-                dbControl.PhieuNhapChiTiet.InsertAllOnSubmit(items);
+                dbControl.PhieuNhaps.Add(item);
+                dbControl.PhieuNhapChiTiets.AddRange(items);
 
 
                 //cap nhat so luong ton kho
@@ -33,7 +34,7 @@ namespace qlShop.models
                 {
                     NhaCungCapControlller.CapNhatCongNo_NhapHang(item.NhaCungCapID, item.ConNo, item.TienHang);
                 }
-                dbControl.SubmitChanges();
+                dbControl.SaveChanges();
                 scope.Complete();
             }
         }
@@ -41,13 +42,13 @@ namespace qlShop.models
 
         static public void Del(string strPhieuNhapID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            PhieuNhap DelItem = dbControl.PhieuNhap.SingleOrDefault(p => p.PhieuNhapID == strPhieuNhapID);
+            dbControl = new QlShop();
+            PhieuNhap DelItem = dbControl.PhieuNhaps.SingleOrDefault(p => p.PhieuNhapID == strPhieuNhapID);
             if (DelItem != null)
             {
                 //lay danh sach san pham cua don hang
                 List<PhieuNhapChiTiet> ListSanPham = new List<PhieuNhapChiTiet>();
-                ListSanPham = (from p in dbControl.PhieuNhapChiTiet
+                ListSanPham = (from p in dbControl.PhieuNhapChiTiets
                                where p.PhieuNhapID == strPhieuNhapID
                                select p).ToList<PhieuNhapChiTiet>();
                 using (TransactionScope scope = new TransactionScope())
@@ -62,9 +63,9 @@ namespace qlShop.models
                     {
                         NhaCungCapControlller.CapNhatCongNo_NhapHang(DelItem.NhaCungCapID, 0 -DelItem.ConNo, 0 - DelItem.TienHang);
                     }
-                    dbControl.PhieuNhap.DeleteOnSubmit(DelItem);
-                    dbControl.PhieuNhapChiTiet.DeleteAllOnSubmit(ListSanPham);
-                    dbControl.SubmitChanges();
+                    dbControl.PhieuNhaps.Remove(DelItem);
+                    dbControl.PhieuNhapChiTiets.RemoveRange(ListSanPham);
+                    dbControl.SaveChanges();
                     scope.Complete();
                 }
             }
@@ -86,8 +87,8 @@ namespace qlShop.models
 
         static public PhieuNhap GetItem(string strPhieuNhapID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            return dbControl.PhieuNhap.SingleOrDefault(p => p.PhieuNhapID == strPhieuNhapID);
+            dbControl = new QlShop();
+            return dbControl.PhieuNhaps.SingleOrDefault(p => p.PhieuNhapID == strPhieuNhapID);
         }
 
 

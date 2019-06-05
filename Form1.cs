@@ -20,5 +20,18 @@ namespace qlShop
         {
             //SanPhamController.Add()
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            foreach (Control ctl in this.Controls)
+            {
+                if (ctl is MdiClient)
+                {
+                    ctl.BackgroundImage = Properties.Resources.technology_background_build_app;
+                    ctl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile;
+                    break;
+                }
+            }
+        }
     }
 }

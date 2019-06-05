@@ -1,4 +1,5 @@
 ﻿using qlShop.models;
+using qlShop.qlshop_model;
 using System;
 using System.Windows.Forms;
 namespace qlShop
@@ -210,7 +211,7 @@ namespace qlShop
                 txtTenShop.Text = iThongtinShop.TenShop;
                 txtDiaChi.Text = iThongtinShop.DiaChi;
                 txtSoDienThoai.Text = iThongtinShop.SoDienThoai;
-                txtwebsite.Text = iThongtinShop.Website;
+                txtwebsite.Text = iThongtinShop.website;
             }
         }
 
@@ -220,7 +221,7 @@ namespace qlShop
             iThongtinShop.TenShop = txtTenShop.Text;
             iThongtinShop.DiaChi= txtDiaChi.Text;
             iThongtinShop.SoDienThoai= txtSoDienThoai.Text;
-            iThongtinShop.Website=txtwebsite.Text;
+            iThongtinShop.website=txtwebsite.Text;
             ThongTinShopController.Update(iThongtinShop);
             MessageBox.Show("Đã cập nhật thông tin shop","Thông báo",MessageBoxButtons.OK,MessageBoxIcon.Information);            
         }

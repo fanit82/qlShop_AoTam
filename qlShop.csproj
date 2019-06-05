@@ -12,7 +12,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>H:\PhanMemTuViet\BenNgoai\Publish\QLyShop\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -20,11 +20,14 @@
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
+    <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <MinimumRequiredVersion>1.0.0.2</MinimumRequiredVersion>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -45,6 +48,24 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>040E2F693E4B66222C8BCA941EAF22291F27FE8F</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>qlShop_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
@@ -208,6 +229,12 @@
     <Compile Include="frmAddSanPham.Designer.cs">
       <DependentUpon>frmAddSanPham.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmBackground.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBackground.Designer.cs">
+      <DependentUpon>frmBackground.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmBarcode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -237,6 +264,12 @@
     </Compile>
     <Compile Include="frmConfigDatabase.Designer.cs">
       <DependentUpon>frmConfigDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfigDatabase2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfigDatabase2.Designer.cs">
+      <DependentUpon>frmConfigDatabase2.cs</DependentUpon>
     </Compile>
     <Compile Include="frmDoanhSo.cs">
       <SubType>Form</SubType>
@@ -426,18 +459,23 @@
     <Compile Include="reports\frmViewReports.Designer.cs">
       <DependentUpon>frmViewReports.cs</DependentUpon>
     </Compile>
+    <Compile Include="reports\PhieuBanHang.cs">
+      <DependentUpon>PhieuBanHang.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="reports\PhieuBanHang_58.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PhieuBanHang_58.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="reports\PhieuTam.cs">
       <DependentUpon>PhieuTam.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="reports\PhieuBanHang.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PhieuBanHang.rpt</DependentUpon>
-      <SubType>Component</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="reports\reportsController.cs" />
@@ -447,6 +485,13 @@
       <DependentUpon>TheKho.rpt</DependentUpon>
       <SubType>Component</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="ToolClass\AppSetting.cs" />
+    <Compile Include="WaitForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaitForm1.Designer.cs">
+      <DependentUpon>WaitForm1.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -472,6 +517,9 @@
     <EmbeddedResource Include="frmAddSanPham.resx">
       <DependentUpon>frmAddSanPham.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmBackground.resx">
+      <DependentUpon>frmBackground.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmBarcode.resx">
       <DependentUpon>frmBarcode.cs</DependentUpon>
     </EmbeddedResource>
@@ -486,6 +534,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmConfigDatabase.resx">
       <DependentUpon>frmConfigDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfigDatabase2.resx">
+      <DependentUpon>frmConfigDatabase2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDoanhSo.resx">
       <DependentUpon>frmDoanhSo.cs</DependentUpon>
@@ -577,14 +628,17 @@
     <EmbeddedResource Include="reports\frmViewReports.resx">
       <DependentUpon>frmViewReports.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="reports\PhieuTam.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>PhieuTam.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="reports\PhieuBanHang.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PhieuBanHang.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reports\PhieuBanHang_58.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PhieuBanHang_58.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reports\PhieuTam.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PhieuTam.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="reports\TheKho.rpt">
@@ -592,10 +646,14 @@
       <LastGenOutput>TheKho.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="WaitForm1.resx">
+      <DependentUpon>WaitForm1.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -607,6 +665,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="qlShop_TemporaryKey.pfx" />
     <None Include="Resources\cancel_16x16.png" />
   </ItemGroup>
   <ItemGroup>
@@ -721,7 +780,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="configapp.xml" />
     <Content Include="LogUpdate.txt" />
+    <None Include="Resources\technology-background-build-app.jpg" />
     <None Include="Resources\viewsetting_16x16.png" />
     <None Include="Resources\apply_32x32.png" />
     <None Include="Resources\exporttoxls_16x16.png" />
@@ -737,6 +798,7 @@
     <None Include="Resources\currency_32x32.png" />
     <None Include="Resources\operatingsyste_16x16.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

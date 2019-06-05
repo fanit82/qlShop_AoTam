@@ -20,6 +20,7 @@ namespace qlShop
             //Utility.NguoiSuDung.NguoiDungID = "admin";
             //Utility.NguoiSuDung.TenNguoiDung = "quản lý";
             Application.Run(new frmLogin());
+            //Application.Run(new frmMain());
             //frmLogin f = new frmLogin();
             //f.Show();
         }

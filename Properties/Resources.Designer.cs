@@ -453,6 +453,16 @@ namespace qlShop.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap technology_background_build_app {
+            get {
+                object obj = ResourceManager.GetObject("technology-background-build-app", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap viewsetting_16x16 {
             get {
                 object obj = ResourceManager.GetObject("viewsetting_16x16", resourceCulture);

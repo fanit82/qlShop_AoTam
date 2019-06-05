@@ -31,7 +31,6 @@ namespace qlShop
                 SetRow["password"] = txtPassword.Text;
                 SetRow["Default"] = true;
             }
-
             //set thong tin kết nối hiện tại là mặc định để kết nối
             foreach (DataRow item in DsXML.Tables[0].Rows)
             {
@@ -44,10 +43,15 @@ namespace qlShop
             string strPathFile = Application.StartupPath + "/configapp.xml";
             DsXML.WriteXml(strPathFile);
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
+
+            //
+
+
             this.Close();
         }
         public void ReadXML()
         {
+            //cbbConnect_name.Properties.Items.Clear();
             string strPathFile = Application.StartupPath + "/configapp.xml";
             //DataSet dsXML = new DataSet();
             if (System.IO.File.Exists(strPathFile))
@@ -137,6 +141,21 @@ namespace qlShop
             {
                 MessageBox.Show("Lỗi kết nối: " + ex.Message);
                 return;
+            }
+        }
+
+        private void cbbConnect_name_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if( e.Button.Caption.ToUpper() =="DELETE")
+            {
+                if (MessageBox.Show("Có muốn xóa cấu hình này không","Xác nhận",MessageBoxButtons.YesNo,MessageBoxIcon.Question)== DialogResult.Yes)
+                {
+                    int i = cbbConnect_name.SelectedIndex;
+                    DataTable tblXML = DsXML.Tables[0];
+                    tblXML.Rows.RemoveAt(i);
+                    //ReadXML();
+                    cbbConnect_name.Properties.Items.RemoveAt(i);
+                }
             }
         }
     }

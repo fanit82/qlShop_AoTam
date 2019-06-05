@@ -8,6 +8,7 @@ using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Data.OleDb;
+using qlShop.qlshop_model;
 
 namespace qlShop.models
 {
@@ -15,6 +16,7 @@ namespace qlShop.models
     {
         public const string QUANLY = "Quản lý";
         public const string NHANVIEN = "Nhân viên";
+        public const string KeyConnectString = "QlShop";
         static public string strConnectString { get; set; }
         static public string TenKetNoi { get; set; }
         static public NguoiDung NguoiSuDung;
@@ -25,7 +27,6 @@ namespace qlShop.models
             //return "Server=.;AttachDbFilename=|DataDirectory|\\Data\\qlShop.mdf;Database=qlShop2;Trusted_Connection=Yes";
             return strConnectString; //ConfigurationManager.ConnectionStrings[1].ToString();
         }
-
         static public bool isConect()
         {
             SqlConnection cnn = new SqlConnection(GetConnectString());

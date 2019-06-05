@@ -92,14 +92,14 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(782, 82);
+            this.panelControl1.Size = new System.Drawing.Size(816, 82);
             this.panelControl1.TabIndex = 0;
             // 
             // simpleButton1
             // 
             this.simpleButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.simpleButton1.ImageOptions.Image = global::qlShop.Properties.Resources.exporttoxls_16x16;
-            this.simpleButton1.Location = new System.Drawing.Point(659, 12);
+            this.simpleButton1.Location = new System.Drawing.Point(693, 12);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(96, 23);
             this.simpleButton1.TabIndex = 12;
@@ -109,7 +109,7 @@
             // txtSearch
             // 
             this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSearch.Location = new System.Drawing.Point(112, 45);
+            this.txtSearch.Location = new System.Drawing.Point(146, 45);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(483, 20);
             this.txtSearch.TabIndex = 11;
@@ -118,7 +118,7 @@
             // labelControl2
             // 
             this.labelControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelControl2.Location = new System.Drawing.Point(112, 30);
+            this.labelControl2.Location = new System.Drawing.Point(146, 30);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(40, 13);
             this.labelControl2.TabIndex = 10;
@@ -140,7 +140,7 @@
             // 
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExport.ImageOptions.Image = global::qlShop.Properties.Resources.pivot_16x16;
-            this.btnExport.Location = new System.Drawing.Point(557, 12);
+            this.btnExport.Location = new System.Drawing.Point(591, 12);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(96, 23);
             this.btnExport.TabIndex = 2;
@@ -151,7 +151,7 @@
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrint.ImageOptions.Image = global::qlShop.Properties.Resources.barcode_16x16;
-            this.btnPrint.Location = new System.Drawing.Point(474, 12);
+            this.btnPrint.Location = new System.Drawing.Point(508, 12);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(80, 23);
             this.btnPrint.TabIndex = 1;
@@ -162,7 +162,7 @@
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAdd.ImageOptions.Image = global::qlShop.Properties.Resources.add_16x16;
-            this.btnAdd.Location = new System.Drawing.Point(366, 12);
+            this.btnAdd.Location = new System.Drawing.Point(400, 12);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(105, 23);
             this.btnAdd.TabIndex = 0;
@@ -173,7 +173,7 @@
             // 
             this.switchCtr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.switchCtr.EditValue = true;
-            this.switchCtr.Location = new System.Drawing.Point(599, 41);
+            this.switchCtr.Location = new System.Drawing.Point(633, 41);
             this.switchCtr.Name = "switchCtr";
             this.switchCtr.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
             this.switchCtr.Properties.OffText = "Ngừng kinh doanh";
@@ -190,7 +190,7 @@
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.gr_btn_del});
-            this.gridControl1.Size = new System.Drawing.Size(782, 331);
+            this.gridControl1.Size = new System.Drawing.Size(816, 632);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -210,6 +210,7 @@
             this.gridColumn9});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView1_CustomDrawRowIndicator);
             this.gridView1.DoubleClick += new System.EventHandler(this.gridView1_DoubleClick);
             // 
             // gridColumn1
@@ -303,7 +304,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 413);
+            this.ClientSize = new System.Drawing.Size(816, 714);
             this.Controls.Add(this.gridControl1);
             this.Controls.Add(this.panelControl1);
             this.Name = "frmSanPham";

@@ -29,14 +29,13 @@
         private void InitializeComponent()
         {
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.btn_load = new DevExpress.XtraEditors.SimpleButton();
+            this.btn_save = new DevExpress.XtraEditors.SimpleButton();
             this.txtFileName = new DevExpress.XtraEditors.TextEdit();
             this.btnOpenFile = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.btn_save = new DevExpress.XtraEditors.SimpleButton();
-            this.lblStatus = new DevExpress.XtraEditors.LabelControl();
+            this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::qlShop.WaitForm1), true, true);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFileName.Properties)).BeginInit();
@@ -46,9 +45,7 @@
             // 
             // panelControl1
             // 
-            this.panelControl1.Controls.Add(this.lblStatus);
             this.panelControl1.Controls.Add(this.btn_save);
-            this.panelControl1.Controls.Add(this.btn_load);
             this.panelControl1.Controls.Add(this.txtFileName);
             this.panelControl1.Controls.Add(this.btnOpenFile);
             this.panelControl1.Controls.Add(this.labelControl1);
@@ -58,15 +55,15 @@
             this.panelControl1.Size = new System.Drawing.Size(649, 57);
             this.panelControl1.TabIndex = 0;
             // 
-            // btn_load
+            // btn_save
             // 
-            this.btn_load.ImageOptions.Image = global::qlShop.Properties.Resources.viewsetting_16x16;
-            this.btn_load.Location = new System.Drawing.Point(426, 14);
-            this.btn_load.Name = "btn_load";
-            this.btn_load.Size = new System.Drawing.Size(65, 23);
-            this.btn_load.TabIndex = 3;
-            this.btn_load.Text = "Load";
-            this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
+            this.btn_save.ImageOptions.Image = global::qlShop.Properties.Resources.save_16x16;
+            this.btn_save.Location = new System.Drawing.Point(425, 14);
+            this.btn_save.Name = "btn_save";
+            this.btn_save.Size = new System.Drawing.Size(65, 23);
+            this.btn_save.TabIndex = 4;
+            this.btn_save.Text = "Update";
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
             // txtFileName
             // 
@@ -107,24 +104,11 @@
             // 
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView1_CustomDrawRowIndicator);
             // 
-            // btn_save
+            // splashScreenManager1
             // 
-            this.btn_save.ImageOptions.Image = global::qlShop.Properties.Resources.save_16x16;
-            this.btn_save.Location = new System.Drawing.Point(497, 14);
-            this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(65, 23);
-            this.btn_save.TabIndex = 4;
-            this.btn_save.Text = "Update";
-            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.Location = new System.Drawing.Point(92, 39);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(56, 13);
-            this.lblStatus.TabIndex = 5;
-            this.lblStatus.Text = "Đang xử lý ";
+            this.splashScreenManager1.ClosingDelay = 500;
             // 
             // frmImportSanPham
             // 
@@ -153,8 +137,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraEditors.SimpleButton btn_load;
         private DevExpress.XtraEditors.SimpleButton btn_save;
-        private DevExpress.XtraEditors.LabelControl lblStatus;
+        private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
     }
 }

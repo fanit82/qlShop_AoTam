@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.ApplicationBlocks.Data;
+using qlShop.qlshop_model;
 
 namespace qlShop.models
 {
@@ -25,7 +26,7 @@ namespace qlShop.models
 
         static public void Add(TraHang item, List<TraHangChiTiet> items)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
+            dbControl = new QlShop();
             using (TransactionScope scope = new TransactionScope())
             {
                 item.TraHangID = TaoMaTraHang("RT", 8);
@@ -38,8 +39,8 @@ namespace qlShop.models
                     //SanPhamController.CapNhatTonKho(DonHangItem.SanPhamID, DonHangItem.SoLuong);
                 }
                 
-                dbControl.TraHang.InsertOnSubmit(item);
-                dbControl.TraHangChiTiet.InsertAllOnSubmit(items);
+                dbControl.TraHangs.Add(item);
+                dbControl.TraHangChiTiets.AddRange(items);
                 //cap nhat so luong ton kho
 
                 foreach (TraHangChiTiet TraHangItem in items)
@@ -56,7 +57,7 @@ namespace qlShop.models
                 //---------------------------------
                 //QuyTienMatController.NhapQuyTienMat(item.DonHangID, item.NgayBan, item.ThanhToan, "BH", "Tiền mặt bán hàng");
                 //------------------end-------------
-                dbControl.SubmitChanges();
+                dbControl.SaveChanges();
                 scope.Complete();
             }
         }
@@ -64,8 +65,8 @@ namespace qlShop.models
 
         static public TraHang GetItem(string strTraHangID)
         {
-            dbControl = new QlShop(Utility.GetConnectString());
-            return dbControl.TraHang.SingleOrDefault(p => p.TraHangID == strTraHangID);
+            dbControl = new QlShop();
+            return dbControl.TraHangs.SingleOrDefault(p => p.TraHangID == strTraHangID);
         }
 
 

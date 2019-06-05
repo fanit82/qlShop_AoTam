@@ -1,6 +1,8 @@
 ﻿using qlShop.models;
+using qlShop.qlshop_model;
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 namespace qlShop
 {

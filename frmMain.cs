@@ -315,10 +315,30 @@ namespace qlShop
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            string strTitle =  string.Format("Quản lý bán hàng - Người dùng hiện tại {0} - đăng nhập vào lúc {1}- Dữ liệu đang thao tác {2}",
+            //foreach (Control ctl in this.Controls)
+            //{
+            //    if (ctl is MdiClient)
+            //    {
+            //        ctl.BackgroundImage = Properties.Resources.technology_background_build_app;
+            //        //ctl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            //        break;
+            //    }
+            //}
+
+            // mo form backgroup len
+            frmBackground f = new frmBackground();
+            f.FormBorderStyle = FormBorderStyle.None;
+            f.ControlBox = false;
+            f.Text = "DashBoard";
+            f.MdiParent = this;
+            f.Show();
+            //f.ti
+            
+            //f.Text = string.Empty;           
+            string strTitle = string.Format("Quản lý bán hàng - Người dùng hiện tại {0} - đăng nhập vào lúc {1}- Dữ liệu đang thao tác {2}",
                 Utility.NguoiSuDung.NguoiDungID, DateTime.Now, Utility.TenKetNoi
                 );
-            this.Text = strTitle;            
+            this.Text = strTitle;
             //setmenu theo phân quyền
             try
             {
@@ -330,7 +350,7 @@ namespace qlShop
                 throw ex;
                 //MessageBox.Show("Chương trình bị lỗi " + ex.Message + "\n\r Vui long liện hệ tác giả", "Thông Báo");
                 //throw            
-            }            
+            }
         }
 
         private void ThongBaoSinhNhat()

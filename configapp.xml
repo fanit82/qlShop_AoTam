@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <ConnectDatabase>
+    <ID>0</ID>
+    <Connect_name>Deverloper</Connect_name>
+    <Server_name>DESKTOP-2KC7F34\SQLEXPRESS</Server_name>
+    <database_name>qlShop2</database_name>
+    <windows_Auth>True</windows_Auth>
+    <user_name />
+    <password />
+    <Default>True</Default>
+  </ConnectDatabase>
+</NewDataSet>
