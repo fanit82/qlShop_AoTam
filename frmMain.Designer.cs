@@ -62,6 +62,7 @@
             this.navBarItem16 = new DevExpress.XtraNavBar.NavBarItem();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.alertControl1 = new DevExpress.XtraBars.Alerter.AlertControl(this.components);
+            this.navBarGroup5 = new DevExpress.XtraNavBar.NavBarGroup();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
@@ -127,9 +128,10 @@
             // 
             // navBarControl1
             // 
-            this.navBarControl1.ActiveGroup = this.navBarGroup1;
+            this.navBarControl1.ActiveGroup = this.navBarGroup5;
             this.navBarControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.navBarControl1.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
+            this.navBarGroup5,
             this.navBarGroup1,
             this.navBarGroup2,
             this.navBarGroup3,
@@ -174,11 +176,10 @@
             this.navBarGroup1.ImageOptions.SmallImage = global::qlShop.Properties.Resources.kpi_32x32;
             this.navBarGroup1.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem1),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem3),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem11),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem10),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem2),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem13)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem13),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem12),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem7)});
             this.navBarGroup1.Name = "navBarGroup1";
             // 
             // navBarItem1
@@ -186,7 +187,7 @@
             this.navBarItem1.Caption = "Đơn hàng";
             this.navBarItem1.ImageOptions.SmallImage = global::qlShop.Properties.Resources.task_32x32;
             this.navBarItem1.Name = "navBarItem1";
-            this.navBarItem1.Tag = "frmDonHang";
+            this.navBarItem1.Tag = "frmAddDonHang";
             this.navBarItem1.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem1_LinkClicked);
             // 
             // navBarItem3
@@ -234,16 +235,12 @@
             // 
             this.navBarGroup2.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.navBarGroup2.Appearance.Options.UseFont = true;
-            this.navBarGroup2.Caption = "Quản lý";
+            this.navBarGroup2.Caption = "Kho Hàng";
             this.navBarGroup2.Expanded = true;
             this.navBarGroup2.ImageOptions.SmallImage = global::qlShop.Properties.Resources.pie_32x32;
             this.navBarGroup2.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem4),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem5),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem12),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem7),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem6),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem8)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem5)});
             this.navBarGroup2.Name = "navBarGroup2";
             // 
             // navBarItem4
@@ -302,6 +299,8 @@
             this.navBarGroup3.Expanded = true;
             this.navBarGroup3.ImageOptions.SmallImage = global::qlShop.Properties.Resources.previewchart_32x32;
             this.navBarGroup3.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem6),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem8),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem14)});
             this.navBarGroup3.Name = "navBarGroup3";
             // 
@@ -318,7 +317,6 @@
             this.navBarGroup4.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.navBarGroup4.Appearance.Options.UseFont = true;
             this.navBarGroup4.Caption = "Hệ thống";
-            this.navBarGroup4.Expanded = true;
             this.navBarGroup4.ImageOptions.SmallImage = global::qlShop.Properties.Resources.technology_32x32;
             this.navBarGroup4.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem9),
@@ -359,6 +357,16 @@
             // xtraTabbedMdiManager1
             // 
             this.xtraTabbedMdiManager1.MdiParent = this;
+            // 
+            // navBarGroup5
+            // 
+            this.navBarGroup5.Caption = "Danh Mục";
+            this.navBarGroup5.ImageOptions.SmallImage = global::qlShop.Properties.Resources.contact_32x32;
+            this.navBarGroup5.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem2),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem3),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem10)});
+            this.navBarGroup5.Name = "navBarGroup5";
             // 
             // frmMain
             // 
@@ -421,6 +429,7 @@
         private DevExpress.XtraNavBar.NavBarItem navBarItem15;
         private DevExpress.XtraNavBar.NavBarItem navBarItem16;
         private DevExpress.XtraNavBar.NavBarItem navBarItem17;
+        private DevExpress.XtraNavBar.NavBarGroup navBarGroup5;
     }
 }
 

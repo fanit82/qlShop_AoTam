@@ -70,6 +70,7 @@
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gr_btn_del = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtSearch.Properties)).BeginInit();
@@ -173,7 +174,7 @@
             // 
             this.switchCtr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.switchCtr.EditValue = true;
-            this.switchCtr.Location = new System.Drawing.Point(633, 41);
+            this.switchCtr.Location = new System.Drawing.Point(633, 43);
             this.switchCtr.Name = "switchCtr";
             this.switchCtr.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
             this.switchCtr.Properties.OffText = "Ngừng kinh doanh";
@@ -201,6 +202,7 @@
             this.gridColumn1,
             this.gridColumn2,
             this.gridColumn3,
+            this.gridColumn11,
             this.gridColumn4,
             this.gridColumn5,
             this.gridColumn6,
@@ -239,42 +241,42 @@
             this.gridColumn4.Caption = "gridColumn4";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
+            this.gridColumn4.VisibleIndex = 4;
             // 
             // gridColumn5
             // 
             this.gridColumn5.Caption = "gridColumn5";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
+            this.gridColumn5.VisibleIndex = 5;
             // 
             // gridColumn6
             // 
             this.gridColumn6.Caption = "gridColumn6";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 5;
+            this.gridColumn6.VisibleIndex = 6;
             // 
             // gridColumn7
             // 
             this.gridColumn7.Caption = "gridColumn7";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 6;
+            this.gridColumn7.VisibleIndex = 7;
             // 
             // gridColumn8
             // 
             this.gridColumn8.Caption = "gridColumn8";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 7;
+            this.gridColumn8.VisibleIndex = 8;
             // 
             // gridColumn10
             // 
             this.gridColumn10.Caption = "gridColumn10";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 8;
+            this.gridColumn10.VisibleIndex = 9;
             // 
             // gridColumn9
             // 
@@ -282,7 +284,7 @@
             this.gridColumn9.ColumnEdit = this.gr_btn_del;
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 9;
+            this.gridColumn9.VisibleIndex = 10;
             // 
             // gr_btn_del
             // 
@@ -299,6 +301,13 @@
             this.gr_btn_del.Name = "gr_btn_del";
             this.gr_btn_del.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.gr_btn_del.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.gr_btn_del_ButtonClick);
+            // 
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "gridColumn11";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 3;
             // 
             // frmSanPham
             // 
@@ -347,5 +356,6 @@
         private DevExpress.XtraEditors.TextEdit txtSearch;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
     }
 }

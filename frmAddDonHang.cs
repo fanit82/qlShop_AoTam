@@ -22,6 +22,7 @@ namespace qlShop
             InitializeComponent();
             forMode = "NEW";
             //ViewItem = new DonHang();
+            KhoiTaoTableDonHangChiTiet();
         }
 
         private void frmAddDonHang_Load(object sender, EventArgs e)
@@ -97,7 +98,7 @@ namespace qlShop
 
                 //lay danh sach san pham
                 DataTable tblTemp = DonHangController.GetSanPham(ViewItem.DonHangID);
-                KhoiTaoTableDonHangChiTiet();
+                //KhoiTaoTableDonHangChiTiet();
                 foreach (DataRow item in tblTemp.Rows)
                 {
                     tblDonHangChiTiet.Rows.Add(item["SanPhamID"].ToString(),
@@ -120,6 +121,7 @@ namespace qlShop
             }
             tblDonHangChiTiet.Columns.Add(new DataColumn("SanPhamID", typeof(string)));
             tblDonHangChiTiet.Columns.Add(new DataColumn("TenSanPham", typeof(string)));
+            tblDonHangChiTiet.Columns.Add(new DataColumn("Size", typeof(string)));
             tblDonHangChiTiet.Columns.Add(new DataColumn("SoLuong", typeof(int)));
             tblDonHangChiTiet.Columns.Add(new DataColumn("DonGia", typeof(int)));
             tblDonHangChiTiet.Columns.Add(new DataColumn("ThanhTien",typeof(decimal),"[SoLuong]*[DonGia]"));
@@ -169,6 +171,12 @@ namespace qlShop
             gridView1.Columns[i].OptionsColumn.AllowEdit = false;
 
             i++;
+            gridView1.Columns[i].Caption = "Size";
+            gridView1.Columns[i].FieldName = "Size";
+            //gridView1.Columns[i].OptionsEditForm.
+            gridView1.Columns[i].OptionsColumn.AllowEdit = true;
+
+            i++;
             gridView1.Columns[i].Caption = "Số lượng";
             gridView1.Columns[i].FieldName = "SoLuong";
             gridView1.Columns[i].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -195,7 +203,13 @@ namespace qlShop
             gridView1.Columns[i].Caption = "#";
             gridView1.Columns[i].OptionsColumn.FixedWidth = true;
             gridView1.Columns[i].Width = 50;
+
+
+            gridView1.OptionsView.ColumnAutoWidth = false;
             gridView1.OptionsView.ShowFooter = true;
+
+            gridView1.OptionsView.ColumnAutoWidth = false;
+
         }
 
         private void KhoiTaoDSKhachHang()
@@ -222,13 +236,9 @@ namespace qlShop
                 int intRow = gridView1.FocusedRowHandle;
                 if (intRow>=0)
                 {
-                    string strSanPhamID = gridView1.GetRowCellValue(intRow, "SanPhamID").ToString();
-                    DataRow[] Rows = tblDonHangChiTiet.Select(string.Format("[SanPhamID]='{0}'", strSanPhamID));
-                    if (Rows.Count()==1)
-                    {
-                        tblDonHangChiTiet.Rows.Remove(Rows[0]);
-                        gridView1.RefreshData();
-                    }
+                    tblDonHangChiTiet.Rows.RemoveAt(intRow);
+                    gridView1.RefreshData();
+                    gridView1.BestFitColumns();
                 }
             }
         }
@@ -276,9 +286,11 @@ namespace qlShop
 
         private void txtGiamGia_EditValueChanged(object sender, EventArgs e)
         {
+
             txtTong.Value = txtTienHang.Value - txtGiamGia.Value;
             txtThanhToan.Value = txtTong.Value;
             txtConNo.Value = txtTong.Value - txtThanhToan.Value;
+            //calcEditPhanTram.Value = (txtGiamGia.Value / txtTienHang.Value) * 100;
         }
 
         private void txtThanhToan_EditValueChanged(object sender, EventArgs e)
@@ -293,7 +305,7 @@ namespace qlShop
 
         private void Save()
         {
-
+            string strMaDonHang = string.Empty;
             using (TransactionScope scope = new TransactionScope())
             {
 
@@ -312,6 +324,7 @@ namespace qlShop
                     itemSave.DonHangID = DonHangController.TaoMaDonHang("EX", 10);
                     itemSave.NgayBan = dateEditNgayBan.DateTime;
                 }
+                strMaDonHang = itemSave.DonHangID;
                 //thong tin ban hang                        
                 if (lookUpEditKhachHang.EditValue != null)
                 {
@@ -341,6 +354,7 @@ namespace qlShop
                         newitem.DonHangID = itemSave.DonHangID;
                         newitem.SanPhamID = item["SanPhamID"].ToString();
                         newitem.TenSanPham = item["TenSanPham"].ToString();
+                        newitem.Size = item["Size"].ToString().ToUpper();
                         newitem.SoLuong = Convert.ToInt32(item["SoLuong"].ToString());
                         newitem.DonGia = Convert.ToDecimal(item["DonGia"].ToString());
                         //newitem.TonKho = SanPhamController.GetTonKho(newitem.SanPhamID);
@@ -351,8 +365,62 @@ namespace qlShop
                 scope.Complete();
             }
             
+            if (MessageBox.Show("Bạn có muốn in Bill luôn không", "Xác Nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Print_Bill(strMaDonHang);
+            }
         }
 
+
+        private void Print_Bill(string strDonHangID)
+        {
+            PhieuBanHang_58 rp = new PhieuBanHang_58();  // new PhieuBanHang();                        
+            rp.SetDataSource(reportsController.prtDonHang(strDonHangID));
+            rp.Refresh();
+            ThongTinShop shop = ThongTinShopController.GetItem();
+            rp.SetParameterValue("TenShop", shop.TenShop);
+            rp.SetParameterValue("DiaChi", shop.DiaChi);
+            rp.SetParameterValue("SoDienThoai", shop.SoDienThoai);
+            rp.SetParameterValue("WebSite", shop.website);
+            frmViewReports fReport = null;
+            foreach (Form item in MdiChildren)
+            {
+                if (item.GetType() == typeof(frmViewReports))
+                {
+                    fReport = (item as frmViewReports);
+                    fReport.crystalReportViewer1.ReportSource = rp;
+                    fReport.Activate();
+                    return;
+                }
+            }
+            fReport = new frmViewReports();
+            fReport.crystalReportViewer1.ReportSource = rp;
+            //fReport.MdiParent = this.MdiParent;
+            fReport.ShowDialog(this);
+        }
+        /// <summary>
+        /// Hàm kiểm tra hợp lệ trước khi save
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private bool isValidateForm(out string strMsg)
+        {
+            string strErr = string.Empty;
+            if (tblDonHangChiTiet.Select("[Size] is null").Count() > 0) strErr += "Chưa nhập size cho sản phẩm. Kiểm tra lại\n\n";
+            if (tblDonHangChiTiet.Rows.Count < 1) strErr += "Chưa có sản phẩm nào trong đơn hàng.\n\n";
+            if (tblDonHangChiTiet.Select("[SoLuong] <=0").Count() > 0) strErr += "Có sản phẩm số lượng không hợp lệ (<=0). Kiểm tra lại.\n\n";
+
+            strMsg = strErr;
+            if (strErr.Equals(string.Empty))
+            {                
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         private void btnSave_Click(object sender, EventArgs e)
         {
             //kiểm tra demo phần mềm-------------------------//
@@ -362,13 +430,19 @@ namespace qlShop
             //    MessageBox.Show("Phần mềm đã hết hạn sử dụng, vui lòng liên hệ tác giả.","Cảnh báo",MessageBoxButtons.OK);
             //    return;
             //}
+            //kiểm tra nếu có sản phẩm nào chưa có size thì không cho lưu.
+            string strError = string.Empty;
+            if (!isValidateForm(out strError))
+            {
+                MessageBox.Show(strError, "Cảnh báo", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
             Save();
             frmDonHang f = new frmDonHang();
             f.MdiParent = this.MdiParent;
             f.Show();
             this.Dispose();
         }
-
         private void btnExport_Click(object sender, EventArgs e)
         {
             frmDonHang f = new frmDonHang();
@@ -378,27 +452,41 @@ namespace qlShop
         }
 
         
-        private void SellNewITem(string strSanPhamID)
+        private void SellNewITem(string strSanPhamID,string strSize = null)
         {
+            if (!SanPhamController.IsExitsItem(strSanPhamID)) //nêu mã sản phẩm ko có, thử tìm mã mở rộng
+            {
+                strSanPhamID = SanPhamController.GetIDFromExtID(strSanPhamID);
+            }
             if (SanPhamController.IsExitsItem(strSanPhamID))
             {
                 SanPham itemSP = SanPhamController.GetItem(strSanPhamID);
-                if (tblDonHangChiTiet == null)
+                DataRow[] findRow = null;
+                if (strSize ==null)
                 {
-                    KhoiTaoTableDonHangChiTiet();
-                }
-                if (tblDonHangChiTiet.Select(string.Format("[SanPhamID]='{0}'", strSanPhamID)).Count() < 1)
-                {
-                    tblDonHangChiTiet.Rows.Add(itemSP.SanPhamID, itemSP.TenSanPham, 1, itemSP.GiaBan);
+                    findRow = tblDonHangChiTiet.Select(string.Format("[SanPhamID]='{0}' and [Size] is null", strSanPhamID));
                 }
                 else
                 {
-                    DataRow findRow = tblDonHangChiTiet.Select(string.Format("[SanPhamID]='{0}'", strSanPhamID))[0];
-                    findRow["SoLuong"] = Convert.ToInt32(findRow["SoLuong"]) + 1;
+                    findRow = tblDonHangChiTiet.Select(string.Format("[SanPhamID]='{0}' and [Size] = '{1}'", strSanPhamID,strSize));
+                }
+                if (findRow.Count()<1)//chưa có
+                {
+                    tblDonHangChiTiet.Rows.Add(itemSP.SanPhamID, itemSP.TenSanPham, strSize, 1, itemSP.GiaBan);
+                }
+                else
+                {
+
+                    findRow[0]["SoLuong"] = Convert.ToInt32(findRow[0]["SoLuong"]) + 1;
                 }
                 gridView1.RefreshData();
+                gridView1.BestFitColumns();
             }
-
+            else
+            {
+                MessageBox.Show("Sản phầm này chưa có trong danh mục,\n\n Vui lòng kiểm tra lại hoặc nhập vào danh mục sản phẩm","Cảnh Báo",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
         }
 
         private void CapNhatTrangThai()
@@ -419,7 +507,6 @@ namespace qlShop
                     txtGhiChu.Enabled = false;
                     txtGiamGia.Enabled = false;
                     txtThanhToan.Enabled = false;
-
                     break;
                 case "EDIT": //dang edit du lieu
                     btnCancel.Enabled = true;
@@ -530,6 +617,7 @@ namespace qlShop
             TblPrinter.Columns.Add(new DataColumn("KhachDua", typeof(decimal)));
             TblPrinter.Columns.Add(new DataColumn("TienThua", typeof(decimal)));
             TblPrinter.Columns.Add(new DataColumn("TenSanPham", typeof(string)));
+            TblPrinter.Columns.Add(new DataColumn("Size", typeof(string)));
             TblPrinter.Columns.Add(new DataColumn("SoLuong", typeof(int)));
             TblPrinter.Columns.Add(new DataColumn("DonGia", typeof(decimal)));
 
@@ -549,12 +637,14 @@ namespace qlShop
                     txtKhachDua.EditValue == null ? 0 : txtKhachDua.EditValue,
                     txtTienThua.EditValue == null ? 0 : txtTienThua.EditValue,
                     item["TenSanPham"].ToString(),
-                    Convert.ToDecimal( item["SoLuong"].ToString()),
+                    item["Size"] is null?"": item["Size"].ToString(),
+                    Convert.ToDecimal( item["SoLuong"].ToString()),                    
                     Convert.ToDecimal( item["DonGia"].ToString())
                     );
             }
             ////-------------------------------------------------------
-            PhieuTam rp = new PhieuTam();
+            //PhieuTam rp = new PhieuTam();
+            PhieuBanHang_58 rp = new PhieuBanHang_58();
             rp.SetDataSource(TblPrinter);
             rp.Refresh();
             ThongTinShop shop = ThongTinShopController.GetItem();
@@ -577,6 +667,14 @@ namespace qlShop
             fReport.crystalReportViewer1.ReportSource = rp;
             fReport.MdiParent = this.MdiParent;
             fReport.Show();            
+        }
+
+        private void calcEditPhanTram_EditValueChanged(object sender, EventArgs e)
+        {
+            txtGiamGia.Value = txtTong.Value * (calcEditPhanTram.Value / 100);
+            txtTong.Value = txtTienHang.Value - txtGiamGia.Value;
+            txtThanhToan.Value = txtTong.Value;
+            txtConNo.Value = txtTong.Value - txtThanhToan.Value;
         }
     }
 }

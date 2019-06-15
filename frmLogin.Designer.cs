@@ -61,6 +61,7 @@
             // lbKetNoi
             // 
             this.lbKetNoi.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.lbKetNoi.Appearance.Options.UseForeColor = true;
             this.lbKetNoi.Location = new System.Drawing.Point(193, 126);
             this.lbKetNoi.Name = "lbKetNoi";
             this.lbKetNoi.Size = new System.Drawing.Size(108, 13);
@@ -78,7 +79,7 @@
             // 
             // btnOk
             // 
-            this.btnOk.Image = global::qlShop.Properties.Resources.operatingsyste_16x16;
+            this.btnOk.ImageOptions.Image = global::qlShop.Properties.Resources.operatingsyste_16x16;
             this.btnOk.Location = new System.Drawing.Point(290, 145);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(87, 23);
@@ -93,6 +94,7 @@
             this.txtMatKhau.Properties.PasswordChar = '*';
             this.txtMatKhau.Size = new System.Drawing.Size(184, 20);
             this.txtMatKhau.TabIndex = 3;
+            this.txtMatKhau.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMatKhau_KeyDown);
             // 
             // txtTenDangNhap
             // 

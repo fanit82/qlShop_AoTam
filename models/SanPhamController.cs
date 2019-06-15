@@ -72,11 +72,11 @@ namespace qlShop.models
         static public int GetTonKho(string strSanPhamID)
         {
             dbControl = new QlShop();
-            SanPham Item = dbControl.SanPhams.SingleOrDefault(p => p.SanPhamID == strSanPhamID);
+        SanPham Item = dbControl.SanPhams.SingleOrDefault(p => p.SanPhamID == strSanPhamID);
             if (Item!=null)
             {
-                return (int)Item.SLTonKho;
-            }
+                return (int) Item.SLTonKho;
+    }
             else
             {
                 return 0;
@@ -158,6 +158,10 @@ namespace qlShop.models
                 ).ToString();            
         }
 
+
+
+        //16/6/2019
+        //Bỏ cập nhật tồn kho, tính 
         static public void CapNhatTonKho(string strSanPhamID, int intSoLuong)
         {
             dbControl = new QlShop();
@@ -166,5 +170,30 @@ namespace qlShop.models
             oItem.SLTonKho = oItem.SLTonKho - intSoLuong;
             dbControl.SaveChanges();
         }
+
+        /// <summary>
+        /// Lay ton kho tat ca ma hang trong he thong
+        /// </summary>
+        static public DataTable TonKhoHeThong()
+        {
+            return SqlHelper.ExecuteDataset(Utility.GetConnectString(), CommandType.StoredProcedure, "NH_SanPham_TonKhoHeThong").Tables[0];
+        }
+
+
+        static public string GetIDFromExtID(string strExt_ID)
+        {
+            dbControl = new QlShop();
+            SanPham objSanPham = dbControl.SanPhams.FirstOrDefault(p => p.EXT_ID == strExt_ID);
+            if (objSanPham != null)
+            {
+                return objSanPham.SanPhamID;
+            }
+            else
+            {
+                return null;
+            }
+            //return dbControl.SanPhams.SingleOrDefault(p => p.SanPhamID == strSanPhamID);
+        }
+
     }
 }

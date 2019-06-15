@@ -86,6 +86,24 @@ namespace qlShop.models
             }
             return output;
         }
+
+
+        /// <summary>
+        /// Hàm lấy tên viết tắt từ ten đầy đủ
+        /// </summary>
+        /// <param name="strTenDayDu"></param>
+        /// <returns></returns>
+        public static string TenVietTat(string strTenDayDu)
+        {
+            //string chuoi = "Nguyen Van tuan Anh";
+            string[] chuoi_cat = strTenDayDu.Split(' ');
+            string ChuoiVietTat = "";
+            for (int i = 0; i <= chuoi_cat.Length - 1; i++)
+            {
+                ChuoiVietTat += chuoi_cat[i].Substring(0, 1).ToUpper();
+            }
+            return ChuoiVietTat;
+        }
     }
 }
 

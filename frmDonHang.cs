@@ -2,6 +2,8 @@
 using qlShop.qlshop_model;
 using qlShop.reports;
 using System;
+using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 namespace qlShop
 {
@@ -21,7 +23,7 @@ namespace qlShop
         }
         private void KhoiTaoLuoi()
         {
-            gridView1.IndicatorWidth = 50;
+            gridView1.IndicatorWidth = 35;
             //gridView1.
             int i = 0;
             gridView1.Columns[i].Caption = "Ngày";
@@ -40,10 +42,10 @@ namespace qlShop
             gridView1.Columns[i].FieldName = "TenKhachHang";
             gridView1.Columns[i].OptionsColumn.AllowEdit = false;
 
-            i++;
-            gridView1.Columns[i].Caption = "Điện thoại";
-            gridView1.Columns[i].FieldName = "SoDienThoai";
-            gridView1.Columns[i].OptionsColumn.AllowEdit = false;
+            //i++;
+            //gridView1.Columns[i].Caption = "Điện thoại";
+            //gridView1.Columns[i].FieldName = "SoDienThoai";
+            //gridView1.Columns[i].OptionsColumn.AllowEdit = false;
 
             i++;
             gridView1.Columns[i].Caption = "Tiền hàng";
@@ -51,6 +53,8 @@ namespace qlShop
             gridView1.Columns[i].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             gridView1.Columns[i].DisplayFormat.FormatString = "### ### ##0";
             gridView1.Columns[i].OptionsColumn.AllowEdit = false;
+            gridView1.Columns[i].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+            gridView1.Columns[i].SummaryItem.DisplayFormat = "{0:### ### ### ###}";
 
             i++;
             gridView1.Columns[i].Caption = "Giảm giá";
@@ -58,6 +62,8 @@ namespace qlShop
             gridView1.Columns[i].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             gridView1.Columns[i].DisplayFormat.FormatString = "### ### ##0";
             gridView1.Columns[i].OptionsColumn.AllowEdit = false;
+            gridView1.Columns[i].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+            gridView1.Columns[i].SummaryItem.DisplayFormat = "{0:### ### ### ###}";
 
             i++;
             gridView1.Columns[i].Caption = "Tổng cộng";
@@ -65,20 +71,26 @@ namespace qlShop
             gridView1.Columns[i].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             gridView1.Columns[i].DisplayFormat.FormatString = "### ### ### ##0";
             gridView1.Columns[i].OptionsColumn.AllowEdit = false;
+            gridView1.Columns[i].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+            gridView1.Columns[i].SummaryItem.DisplayFormat = "{0:### ### ### ###}";
 
-            i++;
-            gridView1.Columns[i].Caption = "Thanh toán";
-            gridView1.Columns[i].FieldName = "ThanhToan";
-            gridView1.Columns[i].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            gridView1.Columns[i].DisplayFormat.FormatString = "### ### ### ##0";
-            gridView1.Columns[i].OptionsColumn.AllowEdit = false;
+            //i++;
+            //gridView1.Columns[i].Caption = "Thanh toán";
+            //gridView1.Columns[i].FieldName = "ThanhToan";
+            //gridView1.Columns[i].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            //gridView1.Columns[i].DisplayFormat.FormatString = "### ### ### ##0";
+            //gridView1.Columns[i].OptionsColumn.AllowEdit = false;
+            //gridView1.Columns[i].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+            //gridView1.Columns[i].SummaryItem.DisplayFormat = "{0:### ### ### ###}";
 
-            i++;
-            gridView1.Columns[i].Caption = "Nợ";
-            gridView1.Columns[i].FieldName = "ConNo";
-            gridView1.Columns[i].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            gridView1.Columns[i].DisplayFormat.FormatString = "### ### ### ##0";
-            gridView1.Columns[i].OptionsColumn.AllowEdit = false;
+            //i++;
+            //gridView1.Columns[i].Caption = "Nợ";
+            //gridView1.Columns[i].FieldName = "ConNo";
+            //gridView1.Columns[i].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            //gridView1.Columns[i].DisplayFormat.FormatString = "### ### ### ##0";
+            //gridView1.Columns[i].OptionsColumn.AllowEdit = false;
+            //gridView1.Columns[i].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+            //gridView1.Columns[i].SummaryItem.DisplayFormat = "{0:### ### ### ###}";
 
             i++;
             gridView1.Columns[i].Caption = "Nhân viên";
@@ -88,10 +100,11 @@ namespace qlShop
             i++;
             gridView1.Columns[i].Caption = "#";
             gridView1.Columns[i].OptionsColumn.FixedWidth = true;
-            gridView1.Columns[i].Width = 70;
+            gridView1.Columns[i].Width = 50;
 
             gridView1.OptionsView.ShowFilterPanelMode =  DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             gridView1.OptionsView.ColumnAutoWidth = false;
+            gridView1.OptionsView.ShowFooter = true;
             //for (int j = 0; j < gridView1.RowCount; j++)
             //{
             //    gridView1.Columns[j].OptionsColumn.AllowEdit = false;
@@ -103,14 +116,21 @@ namespace qlShop
            
             gridView2.Columns[i].Caption = "Sản phẩm";
             gridView2.Columns[i].FieldName = "SanPhamID";
+            gridView2.Columns[i].GroupIndex = 1;
 
             i++;
             gridView2.Columns[i].Caption = "Tên Sản phẩm";
             gridView2.Columns[i].FieldName = "TenSanPham";
 
             i++;
+            gridView2.Columns[i].Caption = "Size";
+            gridView2.Columns[i].FieldName = "Size";
+
+            i++;
             gridView2.Columns[i].Caption = "Số lượng";
             gridView2.Columns[i].FieldName = "SoLuong";
+            gridView2.Columns[i].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+            gridView2.Columns[i].SummaryItem.DisplayFormat = "{0:### ### ### ##0}";
 
             i++;
             gridView2.Columns[i].Caption = "Đơn giá";
@@ -124,24 +144,33 @@ namespace qlShop
             gridView2.Columns[i].UnboundExpression = "[DonGia]*[SoLuong]";
             gridView2.Columns[i].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             gridView2.Columns[i].DisplayFormat.FormatString = "### ### ### ##0";
+            gridView2.Columns[i].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+            gridView2.Columns[i].SummaryItem.DisplayFormat = "{0:### ### ### ###}";
+
+
+
             for (int k = 0; k < gridView2.Columns.Count; k++)
             {
                 gridView2.Columns[k].OptionsColumn.ReadOnly = true;
             }
             gridView2.OptionsView.ColumnAutoWidth = false;
+            gridView2.IndicatorWidth = 35;
+            gridView2.OptionsView.ShowFooter = true;
+            //gridView2.OptionsCustomization.AllowSort = false;
             //gridView2.Columns["SanPhamID"].OptionsColumn.ReadOnly = true;
         }
         private void frmDonHang_Load(object sender, EventArgs e)
         {
             KhoiTaoLuoi();
-            gridControl1.DataSource = DonHangController.GetListInWeek();//lay danh sach don hang trong tuan
             txtSearchDonHang.Properties.NullValuePrompt = "nhập mã đơn hàng/tên khách hàng/số điện thoại để tìm kiếm";
             //TextEdit.Properties.NullValuePrompt
-
             dateEditStart.DateTime = DateTime.Now;
             dateEditEnd.DateTime = dateEditStart.DateTime;
+            DataView tblDefaultView = DonHangController.GetListRangDate(dateEditStart.DateTime, dateEditEnd.DateTime).DefaultView;
+            tblDefaultView.Sort = "[NgayBan] DESC";
+            gridControl1.DataSource = tblDefaultView;
+            gridView1.BestFitColumns();
         }
-
         private void gr_btn_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             int intRow = gridView1.FocusedRowHandle;
@@ -207,7 +236,9 @@ namespace qlShop
 
         private void simpleButton4_Click(object sender, EventArgs e)
         {
-            gridControl1.DataSource = DonHangController.GetListRangDate(dateEditStart.DateTime, dateEditEnd.DateTime);
+            DataView tblDefaultView = DonHangController.GetListRangDate(dateEditStart.DateTime.Date, dateEditEnd.DateTime).DefaultView;
+            tblDefaultView.Sort = "[NgayBan] DESC";
+            gridControl1.DataSource = tblDefaultView;
             gridView1.BestFitColumns();
         }
 
@@ -266,6 +297,7 @@ namespace qlShop
             {
                 string strDonHangID = gridView1.GetRowCellValue(intSelectRow, "DonHangID").ToString();
                 gridControl2.DataSource= DonHangController.GetSanPham(strDonHangID);
+                gridView2.ExpandAllGroups();
                 gridView2.BestFitColumns();
             }
         }
@@ -281,6 +313,30 @@ namespace qlShop
                 e.Info.DisplayText = (e.RowHandle + 1).ToString("00");
             }
             
+        }
+
+        private void gridView2_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+        {
+            if (e.Info.Kind == DevExpress.Utils.Drawing.IndicatorKind.Header)
+            {
+                e.Info.DisplayText = "STT";
+            }
+            else
+            {
+                e.Info.DisplayText = (e.RowHandle + 1).ToString("00");
+            }
+        }
+
+        private void gridView2_CustomDrawFooterCell(object sender, DevExpress.XtraGrid.Views.Grid.FooterCellCustomDrawEventArgs e)
+        {
+            e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+            e.Appearance.ForeColor = System.Drawing.Color.Red;
+        }
+
+        private void gridView1_CustomDrawFooterCell(object sender, DevExpress.XtraGrid.Views.Grid.FooterCellCustomDrawEventArgs e)
+        {
+            e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+            e.Appearance.ForeColor = System.Drawing.Color.Red;
         }
     }
 }

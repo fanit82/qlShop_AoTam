@@ -22,7 +22,7 @@ namespace qlShop.models
                 //cap nhat so luong ton kho thuc te luc xuat
                 foreach (DonHangChiTiet DonHangItem in items)
                 {
-                    DonHangItem.TonKho = SanPhamController.GetTonKho(DonHangItem.SanPhamID);
+                    //DonHangItem.TonKho = SanPhamController.GetTonKho(DonHangItem.SanPhamID);
                     DonHangItem.GiaVon = SanPhamController.GetGiaVon(DonHangItem.SanPhamID);
                     //SanPhamController.CapNhatTonKho(DonHangItem.SanPhamID, DonHangItem.SoLuong);
                 }

@@ -9,25 +9,27 @@ namespace qlShop.qlshop_model
     [Table("PhieuNhapChiTiet")]
     public partial class PhieuNhapChiTiet
     {
-        [Key]
-        [Column(Order = 0)]
+        public int ID { get; set; }
+
+        [Required]
         [StringLength(20)]
         public string PhieuNhapID { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
+        [Required]
         [StringLength(20)]
         public string SanPhamID { get; set; }
 
         [StringLength(50)]
         public string TenSanPham { get; set; }
 
-        public int SoLuong { get; set; }
+        [Required]
+        [StringLength(5)]
+        public string Size { get; set; }
+
+        public int? SoLuong { get; set; }
 
         [Column(TypeName = "numeric")]
-        public decimal DonGia { get; set; }
-
-        public int? TonKho { get; set; }
+        public decimal? DonGia { get; set; }
 
         public DateTime? CreateDate { get; set; }
     }

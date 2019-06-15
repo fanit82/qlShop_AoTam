@@ -17,6 +17,9 @@ namespace qlShop.qlshop_model
         public string TenSanPham { get; set; }
 
         [StringLength(20)]
+        public string EXT_ID { get; set; }
+
+        [StringLength(20)]
         public string DVT { get; set; }
 
         [StringLength(20)]

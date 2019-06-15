@@ -14,6 +14,7 @@ namespace qlShop.models
         static public int Add(NhomHang item)
         {
             dbControl = new QlShop();
+            if (item.LastUpdate == null) item.LastUpdate = DateTime.Now;
             dbControl.NhomHangs.Add(item);
             dbControl.SaveChanges();
             return item.NhomHangID;
@@ -34,5 +35,15 @@ namespace qlShop.models
 	        }            
         }
 
+        static public int CountByName(string strTenNhomHang)
+        {
+            return dbControl.NhomHangs.Count(p => p.TenNhomHang == strTenNhomHang);
+        }
+
+        static public NhomHang GetByName(string strTenNhomHang)
+        {
+            dbControl = new QlShop();
+            return dbControl.NhomHangs.SingleOrDefault(p => p.TenNhomHang == strTenNhomHang);            
+        }
     }
 }

@@ -25,10 +25,10 @@ namespace qlShop.models
 
                 //cap nhat so luong ton kho
 
-                foreach (PhieuNhapChiTiet PhieuNhapItem in items)
-                {
-                    SanPhamController.CapNhatTonKho(PhieuNhapItem.SanPhamID, 0 - PhieuNhapItem.SoLuong);
-                }
+                //foreach (PhieuNhapChiTiet PhieuNhapItem in items)
+                //{
+                //    SanPhamController.CapNhatTonKho(PhieuNhapItem.SanPhamID, 0 - PhieuNhapItem.SoLuong);
+                //}
                 //cap nha cong no va tong tien hang
                 if (item.NhaCungCapID != null)
                 {
@@ -53,11 +53,11 @@ namespace qlShop.models
                                select p).ToList<PhieuNhapChiTiet>();
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    foreach (PhieuNhapChiTiet item in ListSanPham)
-                    {
-                        //cap nhat lai ton kho khi xoa
-                        SanPhamController.CapNhatTonKho(item.SanPhamID, item.SoLuong);
-                    }
+                    //foreach (PhieuNhapChiTiet item in ListSanPham)
+                    //{
+                    //    //cap nhat lai ton kho khi xoa
+                    //    SanPhamController.CapNhatTonKho(item.SanPhamID, item.SoLuong);
+                    //}
                     //cap nhat lai con no khach hang va tien hang
                     if (DelItem.NhaCungCapID != null)
                     {
@@ -98,6 +98,17 @@ namespace qlShop.models
                 new SqlParameter("PhieuNhapID", strDonHangID)
                 ).Tables[0];
 
+        }
+
+
+        static public DataTable GetListRangDate(DateTime dtStart, DateTime dtEnd)
+        {
+            dtStart = dtStart.Date;
+            dtEnd = dtEnd.Date.AddSeconds(86399); //thời điểm cuối cùng trong ngày
+            return SqlHelper.ExecuteDataset(Utility.GetConnectString(), CommandType.StoredProcedure, "NH_PhieuNhap_GetListRangDate",
+                new SqlParameter("@dtStart", dtStart),
+                new SqlParameter("@dtEnd", dtEnd)
+                ).Tables[0];
         }
     }
 }

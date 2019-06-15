@@ -11,7 +11,6 @@ namespace qlShop.qlshop_model
     {
         public int NhomHangID { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string TenNhomHang { get; set; }
 
@@ -20,14 +19,12 @@ namespace qlShop.qlshop_model
         [StringLength(500)]
         public string FullPath { get; set; }
 
-        [Required]
         [StringLength(20)]
         public string NguoiDungID { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string TenNguoiDung { get; set; }
 
-        public DateTime LastUpdate { get; set; }
+        public DateTime? LastUpdate { get; set; }
     }
 }

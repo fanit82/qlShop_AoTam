@@ -23,6 +23,9 @@ namespace qlShop.qlshop_model
         [StringLength(50)]
         public string TenSanPham { get; set; }
 
+        [StringLength(5)]
+        public string Size { get; set; }
+
         public int SoLuongBan { get; set; }
 
         public int SoLuongTra { get; set; }

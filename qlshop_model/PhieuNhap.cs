@@ -18,6 +18,9 @@ namespace qlShop.qlshop_model
         [StringLength(50)]
         public string TenNhaCungCap { get; set; }
 
+        [StringLength(50)]
+        public string MaPhieuNCC { get; set; }
+
         public DateTime NgayNhap { get; set; }
 
         [Required]

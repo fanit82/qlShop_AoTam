@@ -18,8 +18,8 @@ namespace qlShop
         {
             forMode = string.Empty;
             InitializeComponent();
+            KhoiTaoTableDonHangChiTiet();
         }
-
         private void lookUpEdit1_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
 
@@ -33,6 +33,8 @@ namespace qlShop
             }
             tblDonHangChiTiet.Columns.Add(new DataColumn("SanPhamID", typeof(string)));
             tblDonHangChiTiet.Columns.Add(new DataColumn("TenSanPham", typeof(string)));
+            tblDonHangChiTiet.Columns.Add(new DataColumn("DVT", typeof(string)));
+            tblDonHangChiTiet.Columns.Add(new DataColumn("Size", typeof(string)));
             tblDonHangChiTiet.Columns.Add(new DataColumn("SoLuong", typeof(int)));
             tblDonHangChiTiet.Columns.Add(new DataColumn("DonGia", typeof(int)));
             tblDonHangChiTiet.Columns.Add(new DataColumn("ThanhTien", typeof(decimal), "[SoLuong]*[DonGia]"));
@@ -53,6 +55,14 @@ namespace qlShop
             gridView1.Columns[i].Caption = "Tên sản phẩm";
             gridView1.Columns[i].FieldName = "TenSanPham";
             gridView1.Columns[i].OptionsColumn.AllowEdit = false;
+
+            i++;
+            gridView1.Columns[i].Caption = "ĐVT";
+            gridView1.Columns[i].FieldName = "DVT";
+
+            i++;
+            gridView1.Columns[i].Caption = "Size";
+            gridView1.Columns[i].FieldName = "Size";
 
             i++;
             gridView1.Columns[i].Caption = "Số lượng";
@@ -76,12 +86,18 @@ namespace qlShop
             gridView1.Columns[i].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             gridView1.Columns[i].DisplayFormat.FormatString = "# ##0";
             gridView1.Columns[i].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
-
             i++;
             gridView1.Columns[i].Caption = "#";
             gridView1.Columns[i].OptionsColumn.FixedWidth = true;
             gridView1.Columns[i].Width = 50;
+            //mới thêm size
+            //gridView1.Columns[i].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            //gridView1.Columns[i].DisplayFormat.FormatString = "# ##0";
+
             gridView1.OptionsView.ShowFooter = true;
+            gridView1.OptionsView.ColumnAutoWidth = false;
+
+            gridView1.OptionsView.ColumnAutoWidth = false;
         }
 
         //private void KhoiTaoDuLieuSearch()
@@ -122,7 +138,6 @@ namespace qlShop
             lookUpEditNhaCungCap.Text = string.Empty;
             lookUpEditNhaCungCap.Properties.Columns[0].Caption = "Mã nhà cung cấp";
             lookUpEditNhaCungCap.Properties.Columns[0].FieldName = "NhaCungCapID";
-
             lookUpEditNhaCungCap.Properties.Columns[1].Caption = "Tên nhà cung cấp";
             lookUpEditNhaCungCap.Properties.Columns[1].FieldName = "TenNhaCungCap";
             lookUpEditNhaCungCap.Properties.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoComplete;
@@ -191,6 +206,7 @@ namespace qlShop
                 itemSave.NhaCungCapID = lookUpEditNhaCungCap.EditValue.ToString();
                 itemSave.TenNhaCungCap = lookUpEditNhaCungCap.Text;
             }
+            itemSave.MaPhieuNCC = txtPhieuNhaCC.Text;
             itemSave.GhiChu = txtGhiChu.Text;
             itemSave.NhanVienID = txtNhanVien.Text;
             itemSave.TenNhanVien = Utility.NguoiSuDung.TenNguoiDung;
@@ -209,9 +225,11 @@ namespace qlShop
                     newitem.PhieuNhapID = itemSave.PhieuNhapID;
                     newitem.SanPhamID = item["SanPhamID"].ToString();
                     newitem.TenSanPham = item["TenSanPham"].ToString();
+                    newitem.Size = item["Size"].ToString();
                     newitem.SoLuong = Convert.ToInt32(item["SoLuong"].ToString());
                     newitem.DonGia = Convert.ToDecimal(item["DonGia"].ToString());
-                    newitem.TonKho = SanPhamController.GetTonKho(newitem.SanPhamID);
+                    newitem.CreateDate = DateTime.Now;
+                    //newitem.TonKho = SanPhamController.GetTonKho(newitem.SanPhamID);
                     PhieuNhapItems.Add(newitem);
                 }
             }
@@ -232,15 +250,41 @@ namespace qlShop
             txtConNo.Value = txtTienHang.Value - txtThanhToan.Value;
         }
 
+        private bool isValidateForm(out string strMsg)
+        {
+            string strErr = string.Empty;
+            if (tblDonHangChiTiet.Select("[Size] is null").Count() > 0) strErr += "Chưa nhập size cho sản phẩm. Kiểm tra lại\n\n";
+            if (tblDonHangChiTiet.Rows.Count < 1) strErr += "Chưa có sản phẩm nào trong đơn hàng.\n\n";
+            if (tblDonHangChiTiet.Select("[SoLuong] <=0").Count() > 0) strErr += "Có sản phẩm số lượng không hợp lệ (<=0). Kiểm tra lại.\n\n";
+
+            strMsg = strErr;
+            if (strErr.Equals(string.Empty))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Save();
-            frmNhapKho f = new frmNhapKho();
-            f.MdiParent = this.MdiParent;
-            f.Show();
-            this.Dispose();
+            //kiêm tra form trước khi save
+            string strError = string.Empty;
+            if (!isValidateForm(out strError))
+            {
+                MessageBox.Show(strError, "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                Save();
+                frmNhapKho f = new frmNhapKho();
+                f.MdiParent = this.MdiParent;
+                f.Show();
+                this.Dispose();
+            }
         }
-
         private void txtSearch_EditValueChanged(object sender, EventArgs e)
         {
 
@@ -290,14 +334,14 @@ namespace qlShop
                         KhoiTaoTableDonHangChiTiet();
                     }
 
-                    if (tblDonHangChiTiet.Select(string.Format("[SanPhamID]='{0}'", strSanPhamID)).Count() < 1)
+                    if (tblDonHangChiTiet.Select(string.Format("[SanPhamID]='{0}' and [Size] is null", strSanPhamID)).Count() < 1)
                     {
                         tblDonHangChiTiet.Rows.Add(itemSP.SanPhamID, itemSP.TenSanPham, 1, itemSP.GiaBan);
                         //gridView1.RefreshData();
                     }
                     else
                     {
-                        DataRow findRow = tblDonHangChiTiet.Select(string.Format("[SanPhamID]='{0}'", strSanPhamID))[0];
+                        DataRow findRow = tblDonHangChiTiet.Select(string.Format("[SanPhamID]='{0}' and [Size] is null", strSanPhamID))[0];
                         findRow["SoLuong"] = Convert.ToInt32(findRow["SoLuong"]) + 1;
                     }
                     gridView1.RefreshData();
@@ -309,20 +353,32 @@ namespace qlShop
 
         private void gr_btn_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
+
             if (e.Button.Caption.ToUpper().Equals("DEL"))
             {
                 int intRow = gridView1.FocusedRowHandle;
                 if (intRow >= 0)
                 {
-                    string strSanPhamID = gridView1.GetRowCellValue(intRow, "SanPhamID").ToString();
-                    DataRow[] Rows = tblDonHangChiTiet.Select(string.Format("[SanPhamID]='{0}'", strSanPhamID));
-                    if (Rows.Count() == 1)
-                    {
-                        tblDonHangChiTiet.Rows.Remove(Rows[0]);
-                        gridView1.RefreshData();
-                    }
+                    tblDonHangChiTiet.Rows.RemoveAt(intRow);
+                    gridView1.RefreshData();
+                    gridView1.BestFitColumns();
                 }
             }
+
+            //if (e.Button.Caption.ToUpper().Equals("DEL"))
+            //{
+            //    int intRow = gridView1.FocusedRowHandle;
+            //    if (intRow >= 0)
+            //    {
+            //        string strSanPhamID = gridView1.GetRowCellValue(intRow, "SanPhamID").ToString();
+            //        DataRow[] Rows = tblDonHangChiTiet.Select(string.Format("[SanPhamID]='{0}'", strSanPhamID));
+            //        if (Rows.Count() == 1)
+            //        {
+            //            tblDonHangChiTiet.Rows.Remove(Rows[0]);
+            //            gridView1.RefreshData();
+            //        }
+            //    }
+            //}
         }
 
         private void txtSanPham_KeyDown(object sender, KeyEventArgs e)
@@ -344,31 +400,38 @@ namespace qlShop
             }
         }
 
-
-        private void SellNewITem(string strSanPhamID)
+        private void SellNewITem(string strSanPhamID, string strSize = null)
         {
             if (SanPhamController.IsExitsItem(strSanPhamID))
             {
-
-
                 SanPham itemSP = SanPhamController.GetItem(strSanPhamID);
-                if (tblDonHangChiTiet == null)
+                DataRow[] findRow = null;
+                if (strSize == null)
                 {
-                    KhoiTaoTableDonHangChiTiet();
-                }
-
-                if (tblDonHangChiTiet.Select(string.Format("[SanPhamID]='{0}'", strSanPhamID)).Count() < 1)
-                {
-                    tblDonHangChiTiet.Rows.Add(itemSP.SanPhamID, itemSP.TenSanPham, 1, itemSP.GiaBan);
-                    //gridView1.RefreshData();
+                    findRow = tblDonHangChiTiet.Select(string.Format("[SanPhamID]='{0}' and [Size] is null", strSanPhamID));
                 }
                 else
                 {
-                    DataRow findRow = tblDonHangChiTiet.Select(string.Format("[SanPhamID]='{0}'", strSanPhamID))[0];
-                    findRow["SoLuong"] = Convert.ToInt32(findRow["SoLuong"]) + 1;
+                    findRow = tblDonHangChiTiet.Select(string.Format("[SanPhamID]='{0}' and [Size] = '{1}'", strSanPhamID, strSize));
+                }
+                if (findRow.Count() < 1)//chưa có
+                {
+                    tblDonHangChiTiet.Rows.Add(itemSP.SanPhamID, itemSP.TenSanPham, itemSP.DVT, strSize, 1, itemSP.GiaBan);
+                }
+                else
+                {
+
+                    findRow[0]["SoLuong"] = Convert.ToInt32(findRow[0]["SoLuong"]) + 1;
                 }
                 gridView1.RefreshData();
+                gridView1.BestFitColumns();
             }
+            else
+            {
+                MessageBox.Show("Sản phầm này chưa có trong danh mục,\n\n Vui lòng kiểm tra lại hoặc nhập vào danh mục sản phẩm", "Cảnh Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
         }
 
         private void txtSanPham_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -378,6 +441,61 @@ namespace qlShop
                 frmTimSanPham f = new frmTimSanPham();
                 f.SendSanPhamID = new frmTimSanPham.SendData(SellNewITem);
                 f.ShowDialog(this);
+            }
+        }
+
+        private void btn_OpenFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Filter = "Excel file (*.xls)|*.xls|(*.xlsx)|*.xlsx"
+            };
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                txtFileName.Text = fileDialog.FileName;
+                var DS = Utility.ImportExcelXLS(txtFileName.Text, true);
+                foreach (DataRow item in DS.Tables[0].Rows)
+                {
+                    string strTenSP = string.Empty;
+                    string strMaSanPham = string.Empty;
+                    string strDVT = string.Empty;
+                    string strSize = string.Empty;
+                    int intSoLuong = 0;
+                    int intDonGia = 0;
+
+                    //ten san pham
+                    int i = 1;
+                    if (item["TenSanPham"] != null) strTenSP = item["TenSanPham"].ToString();
+                    i++;
+                    if (item["SanPhamID"] != null) strMaSanPham = item["SanPhamID"].ToString();
+
+                    i++;
+                    if (item["Size"] != null) strSize = item["Size"].ToString();
+
+                    i++;
+                    if (item["DVT"] != null) strDVT = item["DVT"].ToString();
+
+
+                    i++;
+                    if (item["SoLuong"] != null)
+                    {
+                        if (!int.TryParse(item["SoLuong"].ToString(), out intSoLuong)) intSoLuong = 0;
+                    }
+
+                    i++;
+                    if (item["DonGia"] != null)
+                    {
+                        if (!int.TryParse(item["DonGia"].ToString(), out intDonGia)) intDonGia = 0;
+                    }
+                    tblDonHangChiTiet.Rows.Add(strMaSanPham, strTenSP, strDVT, strSize, intSoLuong, intDonGia);
+                }
+                gridView1.RefreshData();
+                gridView1.BestFitColumns();
+                //DS.Tables[0].Columns.Add(new DataColumn("ERROR", typeof(String)));//add thêm cột này để xem lỗi;
+                //gridControl1.DataSource = DS.Tables[0];
+                //gridView1.OptionsView.ColumnAutoWidth = false;
+                //gridView1.BestFitColumns();
+                //gridView1.DataSource = DS;                
             }
         }
     }

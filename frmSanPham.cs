@@ -41,16 +41,21 @@ namespace qlShop
             int i = 0;
             gridView1.Columns[i].Caption = "Sản phẩm";
             gridView1.Columns[i].FieldName = "TenSanPham";
-            gridView1.Columns[i].OptionsColumn.AllowEdit = false;
+            gridView1.Columns[i].OptionsColumn.ReadOnly = true;
             i++;
             gridView1.Columns[i].Caption = "Mã sản phẩm";
             gridView1.Columns[i].FieldName = "SanPhamID";
-            gridView1.Columns[i].OptionsColumn.AllowEdit = false;
+            gridView1.Columns[i].OptionsColumn.ReadOnly = true;
+
+            i++;
+            gridView1.Columns[i].Caption = "Mã LH";
+            gridView1.Columns[i].FieldName = "EXT_ID";
+            gridView1.Columns[i].OptionsColumn.ReadOnly = true;
 
             i++;
             gridView1.Columns[i].Caption = "Nhóm sản phẩm";
-            gridView1.Columns[i].FieldName = "TenNhomHang";
-            gridView1.Columns[i].OptionsColumn.AllowEdit = false;
+            gridView1.Columns[i].FieldName = "TenNhom";
+            gridView1.Columns[i].OptionsColumn.ReadOnly = true;
 
             i++;
             gridView1.Columns[i].Caption = "Giá bán";
@@ -60,9 +65,10 @@ namespace qlShop
             gridView1.Columns[i].OptionsColumn.AllowEdit = false;
 
             i++;
-            gridView1.Columns[i].Caption = "Tồn kho";
-            gridView1.Columns[i].FieldName = "SLTonKho";
-            gridView1.Columns[i].OptionsColumn.AllowEdit = false;
+            gridView1.Columns[i].Caption = "DVT";
+            gridView1.Columns[i].FieldName = "DVT";
+            //gridView1.Columns[i].Visible = false;
+            gridView1.Columns[i].OptionsColumn.ReadOnly = true;
 
             i++;
             gridView1.Columns[i].Caption = "Nhà sản xuất";
@@ -283,7 +289,7 @@ namespace qlShop
 
         private void txtSearch_EditValueChanged(object sender, EventArgs e)
         {
-            gridView1.ActiveFilterString = string.Format("[SanPhamID] like '%{0}%' or TenSanPham like '%{0}%'", txtSearch.Text);
+            gridView1.ActiveFilterString = string.Format("[SanPhamID] like '%{0}%' or TenSanPham like '%{0}%' OR EXT_ID like '%{0}%'", txtSearch.Text);
         }
 
         private void simpleButton1_Click_1(object sender, EventArgs e)

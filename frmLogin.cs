@@ -126,5 +126,13 @@ namespace qlShop
         {
             Application.Exit();
         }
+
+        private void txtMatKhau_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode== Keys.Enter)
+            {
+                btnOk.PerformClick();
+            }
+        }
     }
 }

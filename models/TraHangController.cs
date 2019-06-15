@@ -61,8 +61,6 @@ namespace qlShop.models
                 scope.Complete();
             }
         }
-
-
         static public TraHang GetItem(string strTraHangID)
         {
             dbControl = new QlShop();
